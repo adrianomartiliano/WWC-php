@@ -1,6 +1,8 @@
 <?php
 
-require 'components/menu.php';
+include 'components/menu.php';
+
+echo 'Teste';
 
 
 ?>
