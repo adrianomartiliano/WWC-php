@@ -1,0 +1,17 @@
+#barra_status_user{
+    width: 100%;
+    background-color: rgb(33, 37, 41);
+    display: flex;
+    justify-content: space-between;
+    align-items:end;
+    padding: 10px 25px 0 10px;
+    color: white;
+}
+
+#btn_logout a{
+    text-decoration: none;
+    color: white;
+}
+#msg_bem_vindo p {
+    color: white;
+}

@@ -2,7 +2,7 @@
 session_start(); // Inicia a sessão para uso posterior
 
 // Incluir o arquivo de conexão com o banco de dados
-require_once 'db.php';
+require_once 'db/db.php';
 
 // Capturar dados do formulário
 $iduser = $_POST['iduser'];
@@ -11,13 +11,10 @@ $password = $_POST['password'];
 // Debug: Verificar se os dados estão sendo capturados corretamente
 if (empty($iduser) || empty($password)) {
     die("Id no Jogo ou Password não foram preenchidos corretamente.");
-} else {
-    echo "Id no Jogo: $iduser<br>";
-    echo "Password: $password<br>";
 }
 
 // Preparar e executar consulta
-$stmt = $conn->prepare("SELECT password FROM users WHERE iduser=?");
+$stmt = $conn->prepare("SELECT iduser, password, admmaster, nickname FROM users WHERE iduser = ?");
 if (!$stmt) {
     die("Erro na preparação da consulta: " . $conn->error);
 }
@@ -28,15 +25,17 @@ $stmt->store_result();
 
 // Debug: Verificar se a consulta encontrou algum resultado
 if ($stmt->num_rows > 0) {
-    echo "Usuário encontrado.<br>";
-    $stmt->bind_result($stored_password);
+    // Aqui você precisa ligar todas as colunas que você selecionou
+    $stmt->bind_result($db_iduser, $stored_password, $admmaster, $nickname);
     $stmt->fetch();
 
     // Verificar a senha
     if ($password === $stored_password) { // Comparação direta sem hashing
         // Credenciais válidas
         $_SESSION['loggedin'] = true; // Definir uma variável de sessão
-        $_SESSION['iduser'] = $iduser;
+        $_SESSION['iduser'] = $db_iduser;
+        $_SESSION['admmaster'] = $admmaster; // Armazenar a informação de admmaster
+        $_SESSION['nickname'] = $nickname;
         header("Location: painel.php");
         exit(); // Certifique-se de sair após redirecionar
     } else {
