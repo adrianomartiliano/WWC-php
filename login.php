@@ -25,6 +25,7 @@
         <input type='password' class='form-control' id='exampleInputPassword1' name='password'>
     </div>
     <button type='submit' class='btn btn-secondary'>Entrar</button>
+    <button type='submit' class='btn btn-secondary'>Cadastre-se</button>
 </form>"
 ;
 
