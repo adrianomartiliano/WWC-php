@@ -39,12 +39,12 @@ if (session_status() == PHP_SESSION_NONE) {
               Ranking
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
-              <li><a class="dropdown-item" href="#">X1 - Prata</a></li>
+              <li><a class="dropdown-item" href="ranking_x1_prata.php">X1 - Prata</a></li>
               <li><a class="dropdown-item" href="#">Clâs</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="torneios.php">Mural</a>
+            <a class="nav-link" href="#">Mural</a>
           </li>
           <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
             <li class="nav-item">
