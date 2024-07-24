@@ -1,17 +1,25 @@
 <?php
-    session_start();
-    include 'components/menu.php';
-    include 'db/db.php';
+session_start();
+include 'components/menu.php';
+include 'db/db.php';
 
-    // Verifica se o usuário está logado
-    if (!isset($_SESSION['loggedin'])) {
-        // Redireciona para a página de login
-        header("Location: login.php");
-        exit();
-    }
+// Verifica se o usuário está logado
+if (!isset($_SESSION['loggedin'])) {
+    // Redireciona para a página de login
+    header("Location: login.php");
+    exit();
+}
 
-    $sql = "SELECT posicao, nickname, contato FROM rankingx1prata ORDER BY posicao ASC";
-    $result = $conn->query($sql);
+// Verifica se o usuário é um administrador do clã
+$is_admin_can = isset($_SESSION['admcan']) && $_SESSION['admcan'] == 'S';
+
+// Obtém o número total de registros
+$sql_total = "SELECT COUNT(*) as total FROM rankingx1prata_can";
+$result_total = $conn->query($sql_total);
+$total_records = $result_total->fetch_assoc()['total'];
+
+$sql = "SELECT posicao, nickname FROM rankingx1prata_can ORDER BY posicao ASC";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -43,25 +51,39 @@
         <span class='btn btn-primary' data-toggle="modal" data-target="#regrasModal">Regras</span>
     </div>
     <div class="container">
-        <h1 class="mt-2">Ranking X1 Prata</h1>
+        <h1 class="mt-2">X1 de Prata dos Cangaceiros</h1>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Nick</th>
-                    <th>Contato</th>
+                    <?php if ($is_admin_can): ?>
+                        <th>Ações</th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
             <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $whatsappLink = "https://wa.me/" . $row["contato"] . "?text=Olá, quero te desafiar pela sua posição no ranking de X1 nível prata! Quando podemos marcar nossa partida?";
                         echo "<tr>
                                 <td>" . $row["posicao"] . "</td>
-                                <td>" . $row["nickname"] . "</td>
-                                <td><a href='$whatsappLink' target='_blank'>Desafiar</a></td>
-                              </tr>";
+                                <td>" . $row["nickname"] . "</td>";
+                        if ($is_admin_can) {
+                            echo "<td>";
+                            if ($row["posicao"] > 1) {
+                                echo "<a href='processamento/troca_posicao_rankingcan.php?acao=subir&posicao=" . $row["posicao"] . "' class='btn btn-success btn-sm'>Subir</a> ";
+                            } else {
+                                echo "<button class='btn btn-success btn-sm' disabled>Subir</button> ";
+                            }
+                            if ($row["posicao"] < $total_records) {
+                                echo "<a href='processamento/troca_posicao_rankingcan.php?acao=descer&posicao=" . $row["posicao"] . "' class='btn btn-danger btn-sm'>Descer</a>";
+                            } else {
+                                echo "<button class='btn btn-danger btn-sm' disabled>Descer</button>";
+                            }
+                            echo "</td>";
+                        }
+                        echo "</tr>";
                     }
                 } else {
                     echo "<tr><td colspan='3'>Nenhum resultado encontrado</td></tr>";

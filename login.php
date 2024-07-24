@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Por favor, preencha todos os campos.";
     } else {
         // Preparar e executar consulta
-        $stmt = $conn->prepare("SELECT iduser, password, admmaster, nickname FROM users WHERE iduser = ?");
+        $stmt = $conn->prepare("SELECT iduser, password, admmaster, nickname, cla_id, admcan, admcla FROM users WHERE iduser = ?");
         if (!$stmt) {
             die("Erro na preparação da consulta: " . $conn->error);
         }
@@ -30,16 +30,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verificar se a consulta encontrou algum resultado
         if ($stmt->num_rows > 0) {
             // Aqui você precisa ligar todas as colunas que você selecionou
-            $stmt->bind_result($db_iduser, $stored_password, $admmaster, $nickname);
+            $stmt->bind_result($db_iduser, $stored_password, $admmaster, $nickname, $cla_id, $admcan, $admcla);
             $stmt->fetch();
 
             // Verificar a senha
             if (password_verify($password, $stored_password)) {
-                // Senha válida
                 $_SESSION['loggedin'] = true;
                 $_SESSION['iduser'] = $db_iduser;
                 $_SESSION['admmaster'] = $admmaster;
                 $_SESSION['nickname'] = $nickname;
+                $_SESSION['cla_id'] = $cla_id;
+                $_SESSION['admcan'] = $admcan;
+                $_SESSION['admcla'] = $admcla;
                 header("Location: painel.php");
                 exit();
             } else {

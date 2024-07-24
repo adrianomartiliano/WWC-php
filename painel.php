@@ -21,7 +21,7 @@ $admmaster = isset($_SESSION['admmaster']) ? $_SESSION['admmaster'] : 'N';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel</title>
     <style>
-        body{
+        h1{
             text-align: center;
         }
         .card{
@@ -33,19 +33,17 @@ $admmaster = isset($_SESSION['admmaster']) ? $_SESSION['admmaster'] : 'N';
     <h1>Bem-vindo a sua conta</h1>
 
     <?php if ($admmaster === 'S'): ?>
-        <div class="viewer">
-            <h2>Admin Viewer</h2>
-            <p>Conteúdo restrito a administradores.</p>
-            <!-- Conteúdo adicional para administradores -->
-            <a href="add_cla.php">Adicionar Clã</a>
+        <div class="card mb-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Lista dos usuários</h5>
+                <p class="card-text">Lista com todos os usuários do site.</p>
+                <a href="lista_users.php" class="btn btn-primary">Usuários</a>
+            </div>
         </div>
     <?php endif; ?>
-    <div class="card border-secondary mb-3" style="max-width: 18rem;">
-        <div class="card-header">Aviso</div>
-        <div class="card-body">
-            <h5 class="card-title">Nova versão em Construção</h5>
-            <p class="card-text">Obrigado por se cadastrar, continue visitando, semanalmente novas funcionalidades ao site serão adicionadas. Nesse espaço poderá alterar informações da sua conta aqui no site.</p>
-        </div>
-    </div>
+    <?php
+                include 'meus_dados.php';
+            ?>
+            
 </body>
 </html>
