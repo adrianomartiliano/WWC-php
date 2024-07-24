@@ -70,15 +70,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         form {
-            margin: 20vh auto;
+            margin: 40px auto;
             max-width: 400px;
             padding: 15px;
             border: 1px solid gray;
             border-radius: 10px;
+            background-color: white;
         }
     </style>
 </head>
-<body>
+<body class="bg-1">
     <?php require 'components/menu.php'; ?>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

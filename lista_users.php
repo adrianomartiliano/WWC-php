@@ -37,13 +37,11 @@ $result = $conn->query($sql);
         }
         .table-container {
             margin: 20px auto;
-            width: 80%;
+            width: 90%;
         }
     </style>
-    <!-- Inclua aqui o CSS do Bootstrap, se necessário -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
-<body>
+<body class="bg-2">
     <div class="container table-container">
         <h1 class="mt-2">Lista de Usuários</h1>
         <table class="table table-striped">

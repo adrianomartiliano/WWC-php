@@ -44,14 +44,14 @@ $user = $result->fetch_assoc();
             text-align: center;
         }
         .card {
-            margin: 0 auto;
-            margin-bottom: 20px;
+            width: 90%;
+            margin: 20px auto;
         }
     </style>
     <!-- Inclua aqui o CSS do Bootstrap, se necessário -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
-<body>
+<body class="bg-1">
     <div class="card">
 
     

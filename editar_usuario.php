@@ -60,13 +60,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <style>
         .form-container {
             margin: 20px auto;
-            width: 90%;
+        }
+        form{
+            background-color: white;
+        }
+        h1 {
+            text-align: center;
         }
     </style>
     <!-- Inclua aqui o CSS do Bootstrap, se necessário -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
-<body>
+<body class="bg-1">
     <div class="container form-container">
         <h1 class="mt-2">Editar Usuário</h1>
         <form method="post">

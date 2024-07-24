@@ -8,7 +8,12 @@
     <title>Cadastro</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<style>
+    form{
+        background-color: white;
+    }
+</style>
+<body class="bg-1">
     <div>
         <?php
         // Incluir o arquivo de conexão com o banco de dados
@@ -30,8 +35,9 @@
 
         $conn->close();
         ?>
-
+        
         <form id="cadastroForm" action='processamento/process_cadastro.php' method='post'>
+            <h1>Formulário de Cadastro</h1>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="inputNickname" name='nickname' required>
                 <label for="inputNickname">Nickname</label>

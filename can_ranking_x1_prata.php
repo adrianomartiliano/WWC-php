@@ -29,6 +29,9 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking X1 Prata</title>
     <style>
+        .card {
+            width: 90%;
+        }
         .card span {
             width: 200px;
             margin: 10px auto;
@@ -37,6 +40,7 @@ $result = $conn->query($sql);
             text-align: center;
         }
         .menu-x1prata{
+            margin-top: 20px;
             display: flex;
             justify-content: center;
         }
@@ -50,9 +54,9 @@ $result = $conn->query($sql);
         <span class='btn btn-primary' data-toggle="modal" data-target="#carouselModal">Equipamentos</span>
         <span class='btn btn-primary' data-toggle="modal" data-target="#regrasModal">Regras</span>
     </div>
-    <div class="container">
-        <h1 class="mt-2">X1 de Prata dos Cangaceiros</h1>
+    <div class="container card">
         <table class="table table-striped">
+            <h1 class="mt-2">X1 de Prata dos Cangaceiros</h1>
             <thead>
                 <tr>
                     <th>#</th>

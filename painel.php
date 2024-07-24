@@ -22,6 +22,7 @@ $admmaster = isset($_SESSION['admmaster']) ? $_SESSION['admmaster'] : 'N';
     <title>Painel</title>
     <style>
         h1{
+            margin-top: 20px;
             text-align: center;
         }
         .card{
@@ -29,11 +30,11 @@ $admmaster = isset($_SESSION['admmaster']) ? $_SESSION['admmaster'] : 'N';
         }
     </style>
 </head>
-<body>
+<body class="bg-1">
     <h1>Bem-vindo a sua conta</h1>
 
     <?php if ($admmaster === 'S'): ?>
-        <div class="card mb-3" style="width: 18rem;">
+        <div class="card mb-3" >
             <div class="card-body">
                 <h5 class="card-title">Lista dos usuários</h5>
                 <p class="card-text">Lista com todos os usuários do site.</p>

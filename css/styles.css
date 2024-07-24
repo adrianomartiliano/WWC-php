@@ -1,2 +1,9 @@
 @import url('barra_status_user.css'); /* Estilo da barra indicadora de logado e botão de logout */
 @import url('cadastro.css'); /* Estilo da página de cadastro */
+
+.bg-1 {  
+    background-image: url("../assets/bg.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
