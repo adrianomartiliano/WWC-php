@@ -53,6 +53,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>Cangaceiros</a>
                 <ul class='dropdown-menu dropdown-menu-dark'>
                   <li><a class='dropdown-item' href='can_ranking_x1_prata.php'>X1 - Prata</a></li>
+                  <li><a class='dropdown-item' href='can_torneio_x2.php'>Torneio X2</a></li>
                   <li><a class='dropdown-item' href='#'>Ranking de Estrelas</a></li>
                 </ul>
               </li>
