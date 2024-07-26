@@ -1,6 +1,11 @@
 <?php
 include 'db/db.php';
 include 'components/menu.php';
+
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['cla_id'] !== 2) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +73,7 @@ include 'components/menu.php';
 </head>
 <body>
     <div class="btn-classificacao-can">
-        <a class="btn btn-secondary" href="#">Classificação</a>
+        <a class="btn btn-secondary" href="can_classificacao_x2.php">Classificação</a>
     </div>
     
 
