@@ -75,6 +75,14 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
     <div class="btn-classificacao-can">
         <a class="btn btn-secondary" href="can_classificacao_x2.php">Classificação</a>
     </div>
+    <?php
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['admcan'] === 'S'){
+            echo "
+              <div class='btn-classificacao-can'>
+                <a class='btn btn-secondary' href='can_inserir_resultadosx2.php'>Inserir Resultados</a>
+              </div>
+            ";
+          } ?>
     
 
 <h1>Rodadas e Partidas</h1>

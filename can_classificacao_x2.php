@@ -3,10 +3,50 @@ session_start();
 include 'db/db.php';
 include 'components/menu.php';
 
-// Verifica se o usuário está logado e se tem permissão
+// Verifica se o usuário está logado e tem permissão
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['cla_id'] !== 2) {
     header("Location: login.php");
     exit;
+}
+
+// Zerando os totais antes de recalcular
+$sql_reset_totals = "UPDATE teams SET points = 0, kills = 0;";
+
+if ($conn->query($sql_reset_totals) === FALSE) {
+    echo "Erro ao zerar totais: " . $conn->error;
+}
+
+// Atualiza os totais na tabela de equipes
+$sql_update_totals = "
+UPDATE teams t
+LEFT JOIN (
+    SELECT team_id,
+           SUM(total_points) AS total_points,
+           SUM(total_kills) AS total_kills
+    FROM (
+        SELECT team1_id AS team_id, 
+               SUM(score_team1) AS total_points, 
+               SUM(kills_team1_1 + kills_team1_2 + kills_team1_3) AS total_kills
+        FROM matches
+        GROUP BY team1_id
+        UNION ALL
+        SELECT team2_id AS team_id, 
+               SUM(score_team2) AS total_points, 
+               SUM(kills_team2_1 + kills_team2_2 + kills_team2_3) AS total_kills
+        FROM matches
+        GROUP BY team2_id
+    ) combined
+    GROUP BY team_id
+) m ON t.id = m.team_id
+SET t.points = COALESCE(m.total_points, 0),
+    t.kills = COALESCE(m.total_kills, 0);
+
+";
+
+if ($conn->query($sql_update_totals) === TRUE) {
+    // Atualização bem-sucedida
+} else {
+    echo "Erro ao atualizar totais: " . $conn->error;
 }
 ?>
 
@@ -67,14 +107,15 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
         }
     </style>
 </head>
-<body class="bg-1">
+<body>
 
 <h1>Classificação</h1>
 
 <?php
-
 // Consulta para recuperar a classificação dos times ordenados por pontos
-$sql = "SELECT name, points, kills FROM teams ORDER BY points DESC, kills DESC";
+$sql = "SELECT t.name, t.points, t.kills 
+        FROM teams t 
+        ORDER BY t.points DESC, t.kills DESC";
 
 $result = $conn->query($sql);
 
@@ -84,7 +125,7 @@ if ($result->num_rows > 0) {
 
     $position = 1;
 
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         echo "<tr>
                 <td>" . $position . "</td>
                 <td>" . htmlspecialchars($row['name']) . "</td>

@@ -9,8 +9,14 @@ if (!isset($_SESSION['loggedin'])) {
     exit();
 }
 
-// Pega o ID do usuário logado da sessão
-$user_id = $_SESSION['iduser'];
+// Verifica se o usuário tem permissão de admmaster
+$admmaster = isset($_SESSION['admmaster']) ? $_SESSION['admmaster'] : 'N';
+
+if ($admmaster === 'S' && isset($_GET['id'])) {
+    $user_id = $_GET['id'];
+} else {
+    $user_id = $_SESSION['iduser'];
+}
 
 // Consulta para obter os dados do usuário, incluindo a sigla do clã
 $sql = "SELECT u.iduser, u.nickname, u.cla_id, u.whatsapp, u.admcla, c.siglacla 
@@ -61,14 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .form-container {
             margin: 20px auto;
         }
-        form{
+        form {
             background-color: white;
         }
         h1 {
             text-align: center;
         }
     </style>
-    <!-- Inclua aqui o CSS do Bootstrap, se necessário -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
 <body class="bg-1">
@@ -105,8 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
     </div>
-
-    <!-- Inclua aqui o JS do Bootstrap, se necessário -->
+    
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

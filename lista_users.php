@@ -1,28 +1,30 @@
 <?php
-session_start();
-include 'components/menu.php';
-include 'db/db.php';
+    session_start();
+    include 'components/menu.php';
+    include 'db/db.php';
 
-// Verifica se o usuário está logado
-if (!isset($_SESSION['loggedin'])) {
-    // Redireciona para a página de login
-    header("Location: login.php");
-    exit();
-}
+    // Verifica se o usuário está logado
+    if (!isset($_SESSION['loggedin'])) {
+        // Redireciona para a página de login
+        header("Location: login.php");
+        exit();
+    }
 
-// Verifica se o usuário tem permissões de admmaster
-if ($_SESSION['admmaster'] !== 'S') {
-    // Redireciona para uma página de erro ou de acesso negado
-    header("Location: painel.php");
-    exit();
-}
+    // Verifica se o usuário tem permissões de admmaster
+    if ($_SESSION['admmaster'] !== 'S') {
+        // Redireciona para uma página de erro ou de acesso negado
+        header("Location: painel.php");
+        exit();
+    }
 
-// Consulta para obter todos os usuários
-$sql = "SELECT users.nickname, cla.siglacla AS cla_sigla, users.iduser AS user_id
-        FROM users
-        JOIN cla ON users.cla_id = cla.idcla
-        ORDER BY users.nickname ASC";
-$result = $conn->query($sql);
+    // Consulta para obter todos os usuários
+    $sql = "SELECT users.nickname, cla.siglacla AS cla_sigla, users.iduser AS user_id
+            FROM users
+            JOIN cla ON users.cla_id = cla.idcla
+            ORDER BY users.nickname ASC";
+    $result = $conn->query($sql);
+
+    $total = 0;
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +46,7 @@ $result = $conn->query($sql);
 <body class="bg-2">
     <div class="container table-container">
         <h1 class="mt-2">Lista de Usuários</h1>
+        
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -56,6 +59,7 @@ $result = $conn->query($sql);
             <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
+                        $total += 1;
                         echo "<tr>
                                 <td>" . $row["nickname"] . "</td>
                                 <td>" . $row["cla_sigla"] . "</td>
@@ -71,6 +75,9 @@ $result = $conn->query($sql);
             ?>
             </tbody>
         </table>
+        <?php
+            echo "<span>Total: $total</span>";
+        ?>
     </div>
 
     <!-- Inclua aqui o JS do Bootstrap, se necessário -->

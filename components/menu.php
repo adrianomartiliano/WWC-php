@@ -34,6 +34,18 @@ if (session_status() == PHP_SESSION_NONE) {
           <li class="nav-item">
             <a class="nav-link" href="torneios.php">Torneios</a>
           </li>
+
+          <?php
+            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['admmaster'] === 'S'){
+            echo "
+              <li class='nav-item'>
+                <a class='nav-link' href='lista_users.php'>Usuários</a>
+              </li>
+            ";
+          } ?>
+
+
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="ranking.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Ranking
