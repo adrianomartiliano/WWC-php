@@ -19,7 +19,11 @@ require 'components/menu.php';
         <div class="card-body">
             <h5 class="card-title">Inscrições em breve</h5>
             <p class="card-text">Torneio de X4 com premiação para o 1º, 2º e 3º lugar. Inscrição de R$ 40,00 por equipe.</p>
+            <div>
+                <a href="inscricao_x4.php" class="btn btn-secondary" title="Inscrição">
+                    Inscrição
+                </a>
+            </div>
         </div>
     </div>
-
 </body>

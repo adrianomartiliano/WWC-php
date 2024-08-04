@@ -42,9 +42,18 @@ $admmaster = isset($_SESSION['admmaster']) ? $_SESSION['admmaster'] : 'N';
             </div>
         </div>
     <?php endif; ?>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Aqui ficarão os torneios que estou inscrito</h5>
+            <p class="card-text">Em desenvolvimento.</p>
+        </div>
+    </div>
+
+
     <?php
                 include 'meus_dados.php';
             ?>
-            
+    
 </body>
 </html>
