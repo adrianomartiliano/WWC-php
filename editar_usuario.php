@@ -34,25 +34,41 @@ if ($result->num_rows == 0) {
 
 $user = $result->fetch_assoc();
 
-// Consulta para obter todos os clãs
-$sql_clans = "SELECT idcla, siglacla FROM cla";
-$result_clans = $conn->query($sql_clans);
-
 // Atualiza os dados do usuário
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $nickname = $_POST['nickname'];
-    $whatsapp = $_POST['whatsapp'];
-    $admcla = isset($_POST['admcla']) ? 'S' : 'N';
-
-    $sql = "UPDATE users SET nickname = ?, whatsapp = ?, admcla = ? WHERE iduser = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssi", $nickname, $whatsapp, $admcla, $user_id);
-
-    if ($stmt->execute()) {
-        header("Location: lista_users.php");
-        exit();
+    // Validar se os campos estão definidos
+    if (!isset($_POST['nickname']) || !isset($_POST['whatsapp'])) {
+        echo '<script>alert("Campos obrigatórios não preenchidos.");</script>';
     } else {
-        echo "Erro ao atualizar os dados do usuário";
+        $nickname = $_POST['nickname'];
+        $whatsapp = $_POST['whatsapp'];
+        $admcla = isset($_POST['admcla']) ? 'S' : 'N';
+
+        $sql = "UPDATE users SET nickname = ?, whatsapp = ?, admcla = ? WHERE iduser = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssi", $nickname, $whatsapp, $admcla, $user_id);
+
+        if ($stmt->execute()) {
+            header("Location: lista_users.php");
+            exit();
+        } else {
+            echo "Erro ao atualizar os dados do usuário";
+        }
+    }
+}
+
+// Atualiza a senha do usuário
+if (isset($_POST['new_password'])) {
+    $new_password = password_hash($_POST['new_password'], PASSWORD_BCRYPT);
+
+    $sql_password = "UPDATE users SET password = ? WHERE iduser = ?";
+    $stmt_password = $conn->prepare($sql_password);
+    $stmt_password->bind_param("si", $new_password, $user_id);
+
+    if ($stmt_password->execute()) {
+        echo '<script>alert("Senha alterada com sucesso!");</script>';
+    } else {
+        echo '<script>alert("Erro ao alterar a senha.");</script>';
     }
 }
 ?>
@@ -94,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="form-group">
                 <label for="whatsapp">WhatsApp</label>
-                <input type="text" class="form-control" id="whatsapp" name="whatsapp" value="<?php echo htmlspecialchars($user['whatsapp']); ?>" required>
+                <input type="text" class="form-control" id="whatsapp" name="whatsapp" value="<?php echo htmlspecialchars($user['whatsapp']); ?>">
             </div>
             <?php 
                 $admcla = isset($_SESSION['admcla']) ? $_SESSION['admcla'] : 'N';
@@ -106,13 +122,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                     </div>
                 <?php endif; ?>
-            
+
             <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#passwordModal">Alterar Senha</button>
         </form>
     </div>
-    
+
+    <!-- Modal de Alteração de Senha -->
+    <div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="passwordModalLabel">Alterar Senha</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="passwordForm">
+                        <div class="form-group">
+                            <label for="new_password">Nova Senha</label>
+                            <input type="password" class="form-control" id="new_password" name="new_password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password">Confirme a Senha</label>
+                            <input type="password" class="form-control" id="confirm_password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        // Validação da senha
+        document.getElementById('passwordForm').addEventListener('submit', function(event) {
+            const newPassword = document.getElementById('new_password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+
+            if (newPassword !== confirmPassword) {
+                event.preventDefault();
+                alert('As senhas não coincidem.');
+            }
+        });
+    </script>
 </body>
 </html>
