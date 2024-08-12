@@ -27,25 +27,24 @@
 ?>
 
 <style>
-    /* Estiliza a lista de regras */
     .regras-lista {
-        padding-left: 20px; /* Adiciona um recuo à esquerda */
-        margin: 15px 0; /* Espaçamento superior e inferior */
+        padding-left: 20px;
+        margin: 15px 0; 
     }
 
     .regras-lista li {
-        margin-bottom: 10px; /* Espaçamento entre as regras */
-        font-size: 1.1em; /* Aumenta o tamanho da fonte */
-        line-height: 1.4em; /* Aumenta o espaçamento entre linhas */
+        margin-bottom: 10px; 
+        font-size: 1.1em; 
+        line-height: 1.4em; 
     }
 
     .regras-lista li strong {
-        color: #0056b3; /* Destaca o código da regra */
+        color: #0056b3; 
     }
 
-    /* Estiliza a mensagem de "Nenhuma regra encontrada" */
+    
     p {
-        font-size: 1.1em; /* Aumenta o tamanho da fonte */
-        color: #ff0000; /* Destaca a mensagem em vermelho */
+        font-size: 1.1em; 
+        color: #ff0000; 
     }
 </style>
