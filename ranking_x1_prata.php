@@ -24,6 +24,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking X1 Prata</title>
     <style>
+        .card{
+            width: 90%;
+            margin: 20px auto;
+        }
         .card span {
             width: 200px;
             margin: 10px auto;
