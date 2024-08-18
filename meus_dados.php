@@ -48,8 +48,6 @@ $user = $result->fetch_assoc();
             margin: 20px auto;
         }
     </style>
-    <!-- Inclua aqui o CSS do Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
 <body class="bg-1">
     <div class="card">
@@ -64,7 +62,6 @@ $user = $result->fetch_assoc();
         </div>
     </div>
 
-    <!-- Modal para Alteração de Senha -->
     <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -89,7 +86,6 @@ $user = $result->fetch_assoc();
         </div>
     </div>
 
-    <!-- Scripts do Bootstrap e JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.min.js"></script>

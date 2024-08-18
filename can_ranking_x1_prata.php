@@ -47,6 +47,12 @@ $result = $conn->query($sql);
         .menu-x1prata span{
             margin: 10px 10px;
         }
+        .btn-icon{
+            border: none;
+        }
+        img {
+            width: 20px;
+        }
     </style>
 </head>
 <body>
@@ -76,14 +82,14 @@ $result = $conn->query($sql);
                         if ($is_admin_can) {
                             echo "<td>";
                             if ($row["posicao"] > 1) {
-                                echo "<a href='processamento/troca_posicao_rankingcan.php?acao=subir&posicao=" . $row["posicao"] . "' class='btn btn-success btn-sm'>Subir</a> ";
+                                echo "<a href='processamento/troca_posicao_rankingcan.php?acao=subir&posicao=" . $row["posicao"] . "' class='btn-icon'><img src='assets/seta-para-cima-verde.png'></img></a> ";
                             } else {
-                                echo "<button class='btn btn-success btn-sm' disabled>Subir</button> ";
+                                echo "<button class='btn-icon' disabled></button> ";
                             }
                             if ($row["posicao"] < $total_records) {
-                                echo "<a href='processamento/troca_posicao_rankingcan.php?acao=descer&posicao=" . $row["posicao"] . "' class='btn btn-danger btn-sm'>Descer</a>";
+                                echo "<a href='processamento/troca_posicao_rankingcan.php?acao=descer&posicao=" . $row["posicao"] . "' class='btn-icon'><img src='assets/seta-para-baixo-vermelha.png'></img></a>";
                             } else {
-                                echo "<button class='btn btn-danger btn-sm' disabled>Descer</button>";
+                                echo "<button class='btn-icon' disabled></button>";
                             }
                             echo "</td>";
                         }
@@ -134,9 +140,9 @@ $result = $conn->query($sql);
         </div>
     </div>
 
-    <!-- Bootstrap JS e dependências -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
 </body>
 </html>

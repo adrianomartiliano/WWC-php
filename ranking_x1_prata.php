@@ -3,10 +3,14 @@
     include 'components/menu.php';
     include 'db/db.php';
 
+    // Verifica se o usuário está logado
     if (!isset($_SESSION['loggedin'])) {
         header("Location: login.php");
         exit();
     }
+
+    // Verifica se o usuário é administrador
+    $admmaster = isset($_SESSION['admmaster']) && $_SESSION['admmaster'] === 'S';
 
     // Busca os grupos de regras
     $sqlGrupos = "SELECT DISTINCT cod_grupo, desc_grupo FROM regras_x1_ranking_prata ORDER BY cod_grupo ASC";
@@ -15,6 +19,11 @@
     // Busca o ranking
     $sqlRanking = "SELECT posicao, nickname, contato FROM rankingx1prata ORDER BY posicao ASC";
     $resultRanking = $conn->query($sqlRanking);
+
+    // Obtém o número total de registros
+    $sql_total = "SELECT COUNT(*) as total FROM rankingx1prata";
+    $result_total = $conn->query($sql_total);
+    $total_records = $result_total->fetch_assoc()['total'];
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +57,15 @@
         li {
             list-style: none;
         }
+        img {
+            width: 20px;
+        }
+        .btn-icon{
+            border: none;
+        }
+        #btn-desafiar{
+            width: 40px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
@@ -63,7 +81,10 @@
                 <tr>
                     <th>#</th>
                     <th>Nick</th>
-                    <th>Contato</th>
+                    <th>Desafiar</th>
+                    <?php if ($admmaster): ?>
+                        <th>Ações</th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -71,14 +92,32 @@
                 if ($resultRanking->num_rows > 0) {
                     while ($row = $resultRanking->fetch_assoc()) {
                         $whatsappLink = "https://wa.me/" . $row["contato"] . "?text=Olá, quero te desafiar pela sua posição no ranking de X1 nível prata! Quando podemos marcar nossa partida?";
+            
                         echo "<tr>
                                 <td>" . $row["posicao"] . "</td>
                                 <td>" . $row["nickname"] . "</td>
-                                <td><a href='$whatsappLink' target='_blank'>Desafiar</a></td>
-                              </tr>";
+                                <td><a href='$whatsappLink' target='_blank'><img id='btn-desafiar' src='assets/armas.png'></img></a></td>";
+                                
+                        if ($admmaster) {
+                            echo "<td>";
+                            if ($row["posicao"] > 1) {
+                                echo "<a href='processamento/troca_posicao_rankingx1prata.php?acao=subir&posicao=" . $row["posicao"] . "' class='btn-icon'>
+                                <img src='assets/seta-para-cima-verde.png'></img></a> ";
+                            } else {
+                                echo "<button class='btn-icon' disabled></button>";
+                            }
+                            if ($row["posicao"] < $total_records) {
+                                echo "<a href='processamento/troca_posicao_rankingx1prata.php?acao=descer&posicao=" . $row["posicao"] . "' class='btn-icon'><img src='assets/seta-para-baixo-vermelha.png'></img></a>";
+                            } else {
+                                echo "<button class='btn-icon' disabled></button>";
+                            }
+                            echo "</td>";
+                        }
+                        
+                        echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='3'>Nenhum resultado encontrado</td></tr>";
+                    echo "<tr><td colspan='4'>Nenhum resultado encontrado</td></tr>";
                 }
                 $conn->close();
             ?>
@@ -163,6 +202,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
 
 
     <script>
@@ -171,16 +211,16 @@
                 var codGrupo = $(this).prev('.card-header').find('.btn').data('cod-grupo');
                 var targetId = $(this).attr('id');
 
-                if (!$(this).attr('data-loaded')) {
+                if (!$(this).data('loaded')) {
                     $.ajax({
-                        url: 'processamento/fetch_regras_x1_ranking_prata.php',
+                        url: 'busca_regras.php',
                         method: 'POST',
                         data: { cod_grupo: codGrupo },
                         success: function(response) {
                             $('#' + targetId + ' .card-body').html(response);
-                            $('#' + targetId).attr('data-loaded', true);
                         }
                     });
+                    $(this).data('loaded', true);
                 }
             });
         });

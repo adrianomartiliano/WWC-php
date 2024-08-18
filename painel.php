@@ -1,18 +1,17 @@
 <?php
-require 'components/menu.php';
+
+    include 'components/menu.php';
 
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
 
-// Verifique se o usuário está logado
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login.php");
-    exit;
-}
+    if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+        header("Location: login.php");
+        exit;
+    }
 
-// Obter o valor de admmaster da sessão
-$admmaster = isset($_SESSION['admmaster']) ? $_SESSION['admmaster'] : 'N';
+    $admmaster = isset($_SESSION['admmaster']) ? $_SESSION['admmaster'] : 'N';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -29,6 +28,7 @@ $admmaster = isset($_SESSION['admmaster']) ? $_SESSION['admmaster'] : 'N';
             margin: 0 auto;
         }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
 <body class="bg-1">
     <h1>Bem-vindo a sua conta</h1>
@@ -56,4 +56,9 @@ $admmaster = isset($_SESSION['admmaster']) ? $_SESSION['admmaster'] : 'N';
             ?>
     
 </body>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
 </html>

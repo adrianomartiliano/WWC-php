@@ -1,6 +1,6 @@
 #barra_status_user{
     width: 100%;
-    background-color: rgb(33, 37, 41);
+    background-color: rgb(33, 37, 41) !important;
     display: flex;
     justify-content: space-between;
     align-items:end;
