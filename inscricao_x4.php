@@ -162,7 +162,7 @@ if (isUserInTeam($conn, $userid)) {
                     <input type="text" class="form-control" id="team_name" name="team_name" required>
                 </div>
                 <div class="form-group">
-                    <label for="member1">Membro 1 (Você)</label>
+                    <label for="member1">Membro 1 (Você) - Capitão</label>
                     <select class="form-control" id="member1" name="member1" readonly>
                         <option value="<?php echo $_SESSION['iduser']; ?>"><?php echo htmlspecialchars($user_nickname); ?></option>
                     </select>

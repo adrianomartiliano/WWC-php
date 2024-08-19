@@ -21,6 +21,9 @@
                 <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#regrasModal" title="Regras">
                     Regras
                 </a>
+                <a href="teams_x4.php" class="btn btn-secondary" title="Regras">
+                    Equipes
+                </a>
             </div>
         </div>
     </div>
