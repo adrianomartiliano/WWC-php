@@ -10,10 +10,13 @@
 
 <body class="bg-1">
     <div class="card border-secondary mb-3">
-        <div class="card-header">Torneio de Equipes - X4</div>
+        <div class="card-header flex-between">Torneio de Equipes - X4
+            <img class="icon-info" src="assets/info.png" alt="Icon de Informações" data-bs-toggle="modal" data-bs-target='#infoModal'>
+        </div>
+        
         <div class="card-body">
             <h5 class="card-title">Inscrições Liberadas</h5>
-            <p class="card-text">Torneio de X4 com premiação para o 1º, 2º e 3º lugar. Valor: R$ 40,00 por equipe.</p>
+            <p class="card-text"></p>
             <div>
                 <a href="inscricao_x4.php" class="btn btn-secondary" title="Inscrição">
                     Inscrição
@@ -21,12 +24,41 @@
                 <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#regrasModal" title="Regras">
                     Regras
                 </a>
-                <a href="teams_x4.php" class="btn btn-secondary" title="Regras">
+                <a href="teams_x4.php" class="btn btn-secondary" title="Equipes">
                     Equipes
                 </a>
             </div>
         </div>
     </div>
+
+    <!--Modal de Informações-->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document"> >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="infoModalLabel">Informações Complementares</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <p>Esse torneio dará pontos de RANKING para os 10 primeiros colocados.</p>
+                            <p>1º - 20 pontos<br />
+                            2º - 9 pontos<br />
+                            3º - 8 pontos<br />
+                            4º - 7 pontos<br />
+                            5º - 6 pontos<br />
+                            6º - 5 pontos<br />
+                            7º - 4 pontos<br />
+                            8º - 3 pontos<br />
+                            9º - 2 pontos<br />
+                            10º - 1 ponto<br />
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
     <!-- Modal de Regras -->
     <div class="modal fade" id="regrasModal" tabindex="-1" aria-labelledby="regrasModalLabel" aria-hidden="true">

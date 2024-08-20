@@ -7,3 +7,14 @@
     background-repeat: no-repeat;
     height: 100vh;
 }
+
+
+.flex-between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon-info{
+    width: 25px;
+}
