@@ -213,7 +213,7 @@
 
                 if (!$(this).data('loaded')) {
                     $.ajax({
-                        url: 'busca_regras.php',
+                        url: 'processamento/fetch_regras_x1_ranking_prata.php',
                         method: 'POST',
                         data: { cod_grupo: codGrupo },
                         success: function(response) {
