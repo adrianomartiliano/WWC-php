@@ -50,7 +50,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-dark">
               <li><a class="dropdown-item" href="ranking_x1_prata.php">X1 - Prata</a></li>
-              <li><a class="dropdown-item" href="#">Clâs</a></li>
+              <li><a class="dropdown-item" href="ranking_clas.php">Clâs</a></li>
             </ul>
           </li>
           <li class="nav-item">
