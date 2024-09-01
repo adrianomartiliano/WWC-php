@@ -1,39 +1,32 @@
 <?php
-session_start(); // Inicia a sessão para uso posterior
+session_start();
 
-// Incluir o arquivo de conexão com o banco de dados
 require_once 'db/db.php';
 
 // Inicializar variáveis
 $error_message = "";
 
-// Verificar se o formulário foi submetido
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Capturar dados do formulário
     $iduser = $_POST['iduser'];
     $password = $_POST['password'];
 
-    // Debug: Verificar se os dados estão sendo capturados corretamente
     if (empty($iduser) || empty($password)) {
         $error_message = "Por favor, preencha todos os campos.";
     } else {
-        // Preparar e executar consulta
         $stmt = $conn->prepare("SELECT iduser, password, admmaster, nickname, cla_id, admcan, admcla FROM users WHERE iduser = ?");
         if (!$stmt) {
             die("Erro na preparação da consulta: " . $conn->error);
         }
 
-        $stmt->bind_param("i", $iduser); // Usar "i" para inteiro
+        $stmt->bind_param("i", $iduser); 
         $stmt->execute();
         $stmt->store_result();
 
         // Verificar se a consulta encontrou algum resultado
         if ($stmt->num_rows > 0) {
-            // Aqui você precisa ligar todas as colunas que você selecionou
             $stmt->bind_result($db_iduser, $stored_password, $admmaster, $nickname, $cla_id, $admcan, $admcla);
             $stmt->fetch();
 
-            // Verificar a senha
             if (password_verify($password, $stored_password)) {
                 $_SESSION['loggedin'] = true;
                 $_SESSION['iduser'] = $db_iduser;
@@ -107,5 +100,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a class="btn btn-secondary" href="cadastro.php">Cadastre-se</a>
     </form>
 
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     </body>
+    
 </html>

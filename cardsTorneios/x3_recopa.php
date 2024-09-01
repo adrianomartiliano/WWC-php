@@ -1,7 +1,6 @@
-
 <head>
     <style>
-        .card{
+        .card {
             width: 90%;
             margin: 20px auto;
         }
@@ -29,21 +28,19 @@
     </div>
 
     <!--Modal de Informações-->
-    <div class="modal fade" id="infoModalrecopa" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document"> >
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="infoModalLabel">Informações Complementares</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                            <p>Esse torneio dará pontos de RANKING para os 10 primeiros colocados.</p>
-                            <p>1º - 10 pontos<br />
-                            2º - 8 pontos<br />
-                            3º - 5 pontos<br />
-                            </p>
-                    </div>
+    <div class="modal fade" id="infoModalrecopa" tabindex="-1" aria-labelledby="x3-infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="x3-infoModalLabel">Informações Complementares</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Esse torneio dará pontos de RANKING para os 10 primeiros colocados.</p>
+                    <p>1º - 10 pontos<br />
+                    2º - 8 pontos<br />
+                    3º - 5 pontos<br />
+                    </p>
                 </div>
             </div>
         </div>
@@ -51,18 +48,18 @@
     
 
     <!-- Modal de Regras -->
-    <div class="modal fade" id="regrasModalRecopa" tabindex="-1" aria-labelledby="regrasModalLabel" aria-hidden="true">
+    <div class="modal fade" id="regrasModalRecopa" tabindex="-1" aria-labelledby="x3-regrasModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="regrasModalLabel">Regras e Formato - Recopa de X3</h5>
+                    <h5 class="modal-title" id="x3-regrasModalLabel">Regras e Formato - Recopa de X3</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="accordion" id="accordionRegras">
+                    <div class="accordion" id="x3-accordionRegras">
                         <?php
                             include 'db/db.php';
-                            $sqlGrupos = "SELECT DISTINCT cod_grupo, desc_grupo FROM regras_x4_recopa ORDER BY cod_grupo";
+                            $sqlGrupos = "SELECT DISTINCT cod_grupo, desc_grupo FROM regras_x3_recopa ORDER BY cod_grupo";
                             $resultGrupos = $conn->query($sqlGrupos);
 
                             if ($resultGrupos->num_rows > 0) {
@@ -71,15 +68,15 @@
                                     $index++;
                                     echo "
                                     <div class='card'>
-                                        <div class='card-header' id='heading$index'>
+                                        <div class='card-header' id='x3-heading$index'>
                                             <h2 class='mb-0'>
-                                                <button class='btn text-left' type='button' data-cod-grupo='{$grupo['cod_grupo']}' data-bs-toggle='collapse' data-bs-target='#collapse$index' aria-expanded='true' aria-controls='collapse$index'>
+                                                <button class='btn text-left' type='button' data-cod-grupo='{$grupo['cod_grupo']}' data-bs-toggle='collapse' data-bs-target='#x3-collapse$index' aria-expanded='true' aria-controls='x3-collapse$index'>
                                                     {$grupo['desc_grupo']}
                                                 </button>
                                             </h2>
                                         </div>
-                                        <div id='collapse$index' class='collapse' aria-labelledby='heading$index' data-bs-parent='#accordionRegras'>
-                                            <div class='card-body' id='regrasDetalhes$index'>
+                                        <div id='x3-collapse$index' class='collapse' aria-labelledby='x3-heading$index' data-bs-parent='#x3-accordionRegras'>
+                                            <div class='x3-card-body' id='x3-regrasDetalhes$index'>
                                                 <!-- Regras serão carregadas aqui via AJAX -->
                                             </div>
                                         </div>
@@ -95,7 +92,6 @@
         </div>
     </div>
 
-
     <script>
         $(document).ready(function() {
             $('.collapse').on('show.bs.collapse', function () {
@@ -104,11 +100,11 @@
 
                 if (!$(this).attr('data-loaded')) {
                     $.ajax({
-                        url: 'processamento/fetch_regras_x4_recopa.php',
+                        url: 'processamento/fetch_regras_x3_recopa.php',
                         method: 'POST',
                         data: { cod_grupo: codGrupo },
                         success: function(response) {
-                            $('#' + targetId + ' .card-body').html(response);
+                            $('#' + targetId + ' .x3-card-body').html(response);
                             $('#' + targetId).attr('data-loaded', true);
                         }
                     });
