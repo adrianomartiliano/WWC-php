@@ -1,11 +1,3 @@
-<head>
-    <style>
-        .card {
-            width: 90%;
-            margin: 20px auto;
-        }
-    </style>
-</head>
 
 <body class="bg-1">
     <div class="card border-secondary mb-3">
@@ -14,10 +6,10 @@
         </div>
         
         <div class="card-body">
-            <h5 class="card-title">Recopa de X3 com os 8 melhores times!</h5>
-            <p class="card-text"></p>
+            <h5 class="card-title">Copa Elite de X3!!</h5>
+            <p class="card-text">Aqui, os melhores times do torneio de X3 se enfrentarão em mais uma batalha épica, onde não apenas o vencedor será coroado, mas o verdadeiro Rei das Copas será definido. O que ficou para trás no X3 não importa mais; agora, o objetivo é ainda maior! A glória e o topo estão em jogo, e cada equipe lutará com tudo o que tem para alcançar o título supremo!</p>
             <div>
-                <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#regrasModalRecopa" title="Regras">
+                <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#regrasModalRecopa" title="Regras">
                     Regras
                 </a>
                 <!-- <a href="#" class="btn btn-secondary" title="Equipes">
@@ -70,7 +62,7 @@
                                     <div class='card'>
                                         <div class='card-header' id='x3-heading$index'>
                                             <h2 class='mb-0'>
-                                                <button class='btn text-left' type='button' data-cod-grupo='{$grupo['cod_grupo']}' data-bs-toggle='collapse' data-bs-target='#x3-collapse$index' aria-expanded='true' aria-controls='x3-collapse$index'>
+                                                <button class='btn text-left btn-success' type='button' data-cod-grupo='{$grupo['cod_grupo']}' data-bs-toggle='collapse' data-bs-target='#x3-collapse$index' aria-expanded='true' aria-controls='x3-collapse$index'>
                                                     {$grupo['desc_grupo']}
                                                 </button>
                                             </h2>

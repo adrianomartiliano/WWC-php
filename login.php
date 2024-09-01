@@ -62,20 +62,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
-        form {
-            margin: 40px auto;
+        #form-login {
+            margin: 42% auto;
             max-width: 400px;
             border: 1px solid gray;
-            background-color: white;
+            padding: 30px;
+            background-color: #ffffff;
             color: #1FB6FF;
             box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+        }
+        .btn-login{
+            color: white !important;
+            background-color: #1FB6FF !important; 
         }
     </style>
 </head>
 <body class="bg-1">
     <?php require 'components/menu.php'; ?>
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <form id='form-login' action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div class="flex-between">
             <h2>Login</h2>
             <img src="assets/website-password.png" />
@@ -96,8 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         ?>
 
-        <button type="submit" class="btn btn-primary">Entrar</button>
-        <a class="btn btn-secondary" href="cadastro.php">Cadastre-se</a>
+        <button type="submit" class="btn btn-login">Entrar</button>
+        <a class="btn btn-login" href="cadastro.php">Cadastre-se</a>
     </form>
 
 

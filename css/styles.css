@@ -1,11 +1,90 @@
 @import url('barra_status_user.css'); /* Estilo da barra indicadora de logado e botão de logout */
 @import url('cadastro.css'); /* Estilo da página de cadastro */
+@import url('apoiadores.css'); /* Estilo para tratar cards e páginas relacionadas a apoio e doação. */
 
 .bg-1 {  
     background-image: url("../assets/bg.jpg");
     background-size:cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.btn-success {
+    background-color: #ffab07;
+    border: none;
+    color: #215d94;
+}
+
+.btn-success:hover {
+    background-color: #ffab07;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+/* Card header */
+.card-header {
+    background-color: #ffab07;
+    color: #215d94;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Card body */
+.card-body {
+    padding: 20px;
+    background: linear-gradient(145deg, #f8f8f8, #d9d9d9);
+    color: #333;
+}
+
+.card-title {
+    font-size: 1.75rem;
+    color: #215d94;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Modal styles */
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header {
+    background-color: #ffab07;
+    color: #215d94;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.modal-body {
+    padding: 20px;
+    font-size: 1.1rem;
+}
+
+.modal-body a {
+    color: #215d94 !important;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.modal-body a:hover {
+    text-decoration: underline;
 }
 
 

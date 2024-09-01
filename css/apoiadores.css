@@ -1,0 +1,92 @@
+.card {
+    width: 90%;
+    margin: 20px auto;
+    border: none;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+/* Card header-apoiador */
+.card-header-apoiador {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Card body */
+.card-body {
+    padding: 20px;
+    background: linear-gradient(145deg, #f8f8f8, #d9d9d9);
+    color: #333;
+}
+
+.card-title {
+    font-size: 1.75rem;
+    color: #4CAF50;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    margin-top: 5px;
+}
+
+.btn-success {
+    background-color: #4CAF50;
+    border: none;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #45a049;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal styles */
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header-apoiador {
+    background-color: #4CAF50;
+    color: #fff;
+    border-bottom: none;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 15px;
+}
+
+.modal-body {
+    padding: 20px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.modal-body a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.modal-body a:hover {
+    text-decoration: underline;
+}

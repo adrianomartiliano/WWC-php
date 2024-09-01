@@ -1,13 +1,4 @@
 
-<head>
-    <style>
-        .card{
-            width: 90%;
-            margin: 20px auto;
-        }
-    </style>
-</head>
-
 <body class="bg-1">
     <div class="card border-secondary mb-3">
         <div class="card-header flex-between">Torneio de Equipes - X4
@@ -16,15 +7,15 @@
         
         <div class="card-body">
             <h5 class="card-title">Inscrições Liberadas</h5>
-            <p class="card-text"></p>
+            <p class="card-text">Prepare-se para a competição mais acirrada do cenário WW2! Neste torneio de pontos corridos, equipes de 4 jogadores vão se enfrentar em batalhas intensas, onde cada tiro conta e a estratégia é tudo. Somente os mais habilidosos e coordenados alcançarão o topo. Afie sua mira, fortaleça sua equipe e domine a arena. A glória aguarda aqueles que forem implacáveis!</p>
             <div>
-                <a href="inscricao_x4.php" class="btn btn-secondary" title="Inscrição">
+                <a href="inscricao_x4.php" class="btn btn-success" title="Inscrição">
                     Inscrição
                 </a>
-                <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#regrasModal" title="Regras">
+                <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#regrasModal" title="Regras">
                     Regras
-                </a>
-                <a href="teams_x4.php" class="btn btn-secondary" title="Equipes">
+                </a><br />
+                <a href="teams_x4.php" class="btn btn-success" title="Equipes">
                     Equipes
                 </a>
             </div>
@@ -83,7 +74,7 @@
                                     <div class='card'>
                                         <div class='card-header' id='heading$index'>
                                             <h2 class='mb-0'>
-                                                <button class='btn text-left' type='button' data-cod-grupo='{$grupo['cod_grupo']}' data-bs-toggle='collapse' data-bs-target='#collapse$index' aria-expanded='true' aria-controls='collapse$index'>
+                                                <button class='btn text-left btn-success' type='button' data-cod-grupo='{$grupo['cod_grupo']}' data-bs-toggle='collapse' data-bs-target='#collapse$index' aria-expanded='true' aria-controls='collapse$index'>
                                                     {$grupo['desc_grupo']}
                                                 </button>
                                             </h2>

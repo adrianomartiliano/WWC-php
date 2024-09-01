@@ -9,8 +9,18 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <style>
-    form{
-        background-color: white;
+    #form-cadastro{
+        margin: 30% auto;
+        max-width: 400px;
+        border: 1px solid gray;
+        padding: 30px;
+        background-color: #ffffff;
+        color: #1FB6FF;
+        box-shadow: 0 0 18px rgba(0, 0, 0, 0.8);
+    }
+    .btn-login{
+        color: white !important;
+        background-color: #1FB6FF !important; 
     }
 </style>
 <body class="bg-1">
@@ -36,7 +46,7 @@
         $conn->close();
         ?>
         
-        <form id="cadastroForm" action='processamento/process_cadastro.php' method='post'>
+        <form id="form-cadastro" action='processamento/process_cadastro.php' method='post'>
             <h1>Formulário de Cadastro</h1>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="inputNickname" name='nickname' required>
@@ -69,7 +79,7 @@
                 <div id="passwordError" class="text-danger mt-2" style="display:none;">As senhas não coincidem.</div>
             </div>
             
-            <input class='btn btn-secondary' type='submit' value='Enviar' />
+            <input class='btn btn-login' type='submit' value='Enviar' />
         </form>
 
     </div>

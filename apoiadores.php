@@ -41,6 +41,7 @@ if ($viewType === 'players') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apoiadores do Site</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <style>
         .active-btn {
             background-color: #007bff;
@@ -187,7 +188,8 @@ if ($viewType === 'players') {
                             Pix: 43999929497</p>
                             <p>Fora do Brasil <br />
                             PayPal: (consulte o e-mail para transferência)</p>
-                            <br /><br /><br />
+                            <p>Mercado Pago: <a href='https://link.mercadopago.com.br/ww2cup' target='_blank'>Clique Aqui!</a></p>
+                            <br /><br />
                             
                             
                             <p>Manter este site de torneios funcionando envolve diversos custos, desde hospedagem e manutenção até a melhoria contínua da nossa plataforma. Criamos este espaço para que jogadores possam se conectar, competir e se divertir, e é graças ao apoio da nossa comunidade que conseguimos manter tudo isso ativo.</p>
