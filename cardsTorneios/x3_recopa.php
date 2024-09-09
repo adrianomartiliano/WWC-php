@@ -12,9 +12,9 @@
                 <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#regrasModalRecopa" title="Regras">
                     Regras
                 </a>
-                <!-- <a href="#" class="btn btn-secondary" title="Equipes">
+                <a href="copa_elite.php" class="btn btn-success" title="Tabela">
                     Tabela
-                </a> -->
+                </a>
             </div>
         </div>
     </div>

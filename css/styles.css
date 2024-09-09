@@ -1,9 +1,17 @@
 @import url('barra_status_user.css'); /* Estilo da barra indicadora de logado e botão de logout */
 @import url('cadastro.css'); /* Estilo da página de cadastro */
 @import url('apoiadores.css'); /* Estilo para tratar cards e páginas relacionadas a apoio e doação. */
+@import url('copa-elite.css'); /* Estilo de todas páginas (fases) relacionadas a copa */
+
 
 .bg-1 {  
     background-image: url("../assets/bg.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+.bg-2 {  
+    background-image: url("../assets/bg-2.jpg");
     background-size:cover;
     background-repeat: no-repeat;
     height: 100%;
@@ -96,4 +104,15 @@
 
 .icon-info{
     width: 25px;
+}
+.icon-image{
+    width: 45px;
+    margin: 3px;
+}
+
+.msg-att-com-sucesso{
+    background-color: rgb(21, 223, 122);
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
 }
