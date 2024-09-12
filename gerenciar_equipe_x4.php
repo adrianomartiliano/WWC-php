@@ -111,7 +111,7 @@ $resultAvailableMembers = $stmtAvailable->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Equipe - <?= htmlspecialchars($team['team_name']); ?></title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
 </head>
 <body>
     <div class="container mt-5">
@@ -162,7 +162,7 @@ $resultAvailableMembers = $stmtAvailable->get_result();
                     <?php endwhile; ?>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Atualizar Equipe</button>
+            <button type="submit" class="btn btn-default">Atualizar Equipe</button>
         </form>
     </div>
 

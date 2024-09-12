@@ -39,24 +39,18 @@ $user = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel</title>
-    <style>
-        h1 {
-            text-align: center;
-        }
-        .card {
-            width: 90%;
-            margin: 20px auto;
-        }
-    </style>
 </head>
 <body class="bg-1">
     <div class="card">
-        <div class="card-body">
+        <div id='card-meus-dados'>
             <h5 class="card-title">Meus Dados</h5>
-            <p class="card-text"><strong>ID:</strong> <?php echo htmlspecialchars($user['iduser']); ?></p>
-            <p class="card-text"><strong>Nickname:</strong> <?php echo htmlspecialchars($user['nickname']); ?></p>
-            <p class="card-text"><strong>Clã:</strong> <?php echo htmlspecialchars($user['cla_sigla']); ?></p>
-            <p class="card-text"><strong>Whatsapp:</strong> <?php echo htmlspecialchars($user['whatsapp']); ?></p>
+            <div class='row-meus-dados'>
+                <p class="text-meus-dados"><strong>ID:</strong> <?php echo htmlspecialchars($user['iduser']); ?></p>
+                <p class="text-meus-dados"><strong>Clã:</strong> <?php echo htmlspecialchars($user['cla_sigla']); ?></p>
+            </div>
+            <p class="text-meus-dados"><strong>Nickname:</strong> <?php echo htmlspecialchars($user['nickname']); ?></p>
+            
+            <p class="text-meus-dados"><strong>Whatsapp:</strong> <?php echo htmlspecialchars($user['whatsapp']); ?></p>
             <a href="editar_usuario.php?id=<?php echo $user['iduser']; ?>" class="btn btn-primary">Editar</a>
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Alterar Senha</button>
         </div>

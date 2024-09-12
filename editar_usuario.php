@@ -123,8 +123,8 @@ if (isset($_POST['new_password'])) {
                     </div>
                 <?php endif; ?>
 
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#passwordModal">Alterar Senha</button>
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#passwordModal">Alterar Senha</button>
         </form>
     </div>
 
@@ -146,7 +146,7 @@ if (isset($_POST['new_password'])) {
                             <label for="confirm_password">Confirme a Senha</label>
                             <input type="password" class="form-control" id="confirm_password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="submit" class="btn btn-success">Salvar</button>
                     </form>
                 </div>
             </div>

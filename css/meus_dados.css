@@ -1,0 +1,8 @@
+#card-meus-dados{
+    padding: 20px;
+    text-align: left;
+}
+
+.row-meus-dados{
+    display: flex;
+}

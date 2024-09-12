@@ -36,23 +36,11 @@ $resultTeams = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel</title>
-    <style>
-        h1 {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .card {
-            margin: 0 auto;
-        }
-        .manage-team-btn {
-            margin-top: 10px;
-        }
-    </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
 </head>
 <body class="bg-1">
-    <h1>Bem-vindo a sua conta</h1>
+    <h1 id='title-welcome-painel'>Bem-vindo(a) ao seu painel</h1>
 
     <?php if ($admmaster === 'S'): ?>
         <div class="card mb-3">

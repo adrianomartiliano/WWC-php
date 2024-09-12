@@ -72,8 +72,8 @@
 </head>
 <body>
     <div class='container menu-x1prata'>
-        <span class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#carouselModal">Equipamentos</span>
-        <span class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#regrasModal">Regras</span>
+        <span class='btn btn-default' data-bs-toggle="modal" data-bs-target="#carouselModal">Equipamentos</span>
+        <span class='btn btn-default' data-bs-toggle="modal" data-bs-target="#regrasModal">Regras</span>
     </div>
     <div class="container">
         <h1 class="mt-2">Ranking X1 Prata</h1>

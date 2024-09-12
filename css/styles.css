@@ -2,6 +2,7 @@
 @import url('cadastro.css'); /* Estilo da página de cadastro */
 @import url('apoiadores.css'); /* Estilo para tratar cards e páginas relacionadas a apoio e doação. */
 @import url('copa-elite.css'); /* Estilo de todas páginas (fases) relacionadas a copa */
+@import url('meus_dados.css');
 
 
 .bg-1 {  
@@ -26,7 +27,7 @@
     transition: all 0.3s ease;
 }
 
-.btn-success {
+.btn-default {
     background-color: #ffab07;
     border: none;
     color: #215d94;

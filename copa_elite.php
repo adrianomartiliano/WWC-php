@@ -18,7 +18,7 @@ $admmaster = isset($_SESSION['admmaster']) && $_SESSION['admmaster'] === 'S';
 <body class='bg-2'>
     
     <div class='menu-de-fases'>
-        <a href="copa_elite_semi.php" class='btn btn-success btn-opacity'>Semi-Final</a><a href="copa_elite_final.php" class='btn btn-success btn-opacity'>Final</a>
+        <a href="copa_elite_semi.php" class='btn btn-default btn-opacity'>Semi-Final</a><a href="copa_elite_final.php" class='btn btn-default btn-opacity'>Final</a>
     </div>
 
     <h1 class='title-fase'>Quartas de Final</h1>
@@ -26,7 +26,7 @@ $admmaster = isset($_SESSION['admmaster']) && $_SESSION['admmaster'] === 'S';
     <!-- Botão para atualizar partidas (apenas para admmaster) -->
     <?php if ($admmaster): ?>
     <div class='att-partida'>
-        <button type="button" class="btn btn-success btn-opacity" data-bs-toggle="modal" data-bs-target="#updateModal">
+        <button type="button" class="btn btn-default btn-opacity" data-bs-toggle="modal" data-bs-target="#updateModal">
             Atualizar Partidas
         </button>
     </div>

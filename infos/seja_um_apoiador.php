@@ -10,10 +10,10 @@
                 <br />Vamos juntos manter nossas disputas cada vez mais ativas, aumentando nossa rivalidade e nossa vontade em vencer! 
             </p>
             <div>
-                <a href="apoiadores.php" class="btn btn-success">
+                <a href="apoiadores.php" class="btn btn-default">
                     Apoiadores
                 </a>
-                <a class='btn btn-success' data-bs-toggle="modal" data-bs-target='#infoModalApoio'>
+                <a class='btn btn-default' data-bs-toggle="modal" data-bs-target='#infoModalApoio'>
                     Doar
                 </a>
             </div>

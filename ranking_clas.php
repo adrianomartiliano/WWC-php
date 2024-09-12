@@ -38,7 +38,6 @@ $resultAllClans = $conn->query($sqlAllClans);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking de Clãs</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <style>
         .btn-add-points {
             margin: 20px;
@@ -50,7 +49,7 @@ $resultAllClans = $conn->query($sqlAllClans);
 </head>
 <body>
 <?php if ($admmaster): ?>
-    <button type="button" class="btn btn-success btn-add-points" data-bs-toggle="modal" data-bs-target="#adicionarPontosModal">
+    <button type="button" class="btn btn-default btn-add-points" data-bs-toggle="modal" data-bs-target="#adicionarPontosModal">
         Adicionar Pontos
     </button>
 <?php endif; ?>
@@ -114,7 +113,7 @@ $resultAllClans = $conn->query($sqlAllClans);
                         <label for="motivo" class="form-label">Motivo</label>
                         <textarea class="form-control" id="motivo" name="motivo" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Adicionar Pontos</button>
+                    <button type="submit" class="btn btn-success">Adicionar Pontos</button>
                     </form>
                 </div>
             </div>

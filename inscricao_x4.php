@@ -141,14 +141,13 @@ if (isUserInTeam($conn, $userid)) {
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="teamModalLabel">Aviso de Inscrição</h5>
+                            <h5 class="modal-title" id="teamModalLabel">Atenção!</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             Você já está inscrito na equipe: <strong><?php echo htmlspecialchars($team_name); ?></strong>. Não é possível nova inscrição.
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                             <a href="index.php" class="btn btn-primary">Voltar à Página Inicial</a>
                         </div>
                     </div>
