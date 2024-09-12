@@ -63,9 +63,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         #form-login {
-            margin: 150px auto;
+            margin: 100px auto;
             max-width: 400px;
             border: 1px solid gray;
+            border-radius: 10px;
             padding: 30px;
             background-color: #ffffff;
             color: #1FB6FF;

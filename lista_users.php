@@ -43,7 +43,7 @@
         }
     </style>
 </head>
-<body class="bg-2">
+<body >
     <div class="container table-container">
         <h1 class="mt-2">Lista de Usuários</h1>
         

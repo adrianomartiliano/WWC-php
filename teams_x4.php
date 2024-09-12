@@ -21,10 +21,6 @@ $resultTeams = $conn->query($sqlTeams);
         .status-c {
             background-color: #d4edda;
         }
-        .msg-rodape{
-            font-size: 9px;
-            margin-top: 50px;
-        }
     </style>
 </head>
 <body class="bg-light">
@@ -61,7 +57,6 @@ $resultTeams = $conn->query($sqlTeams);
         }
         ?>
     </div>
-    <span class='msg-rodape'>Tom verde indica que a equipe já pagou a inscrição!</span>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

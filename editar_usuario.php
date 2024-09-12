@@ -92,7 +92,7 @@ if (isset($_POST['new_password'])) {
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css">
 </head>
-<body class="bg-1">
+<body>
     <div class="container form-container">
         <h1 class="mt-2">Editar Usuário</h1>
         <form method="post">

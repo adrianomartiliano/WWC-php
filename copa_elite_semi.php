@@ -11,17 +11,17 @@ $admmaster = isset($_SESSION['admmaster']) && $_SESSION['admmaster'] === 'S';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fases do Torneio - Quartas de Final</title>
+    <title>Fases do Torneio - Semi Final</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
 </head>
 <body class='bg-2'>
     
     <div class='menu-de-fases'>
-        <a href="copa_elite_semi.php" class='btn btn-success btn-opacity'>Semi-Final</a><a href="copa_elite_final.php" class='btn btn-success btn-opacity'>Final</a>
+        <a href="copa_elite.php" class='btn btn-success btn-opacity'>Quartas de Final</a><a href="copa_elite_final.php" class='btn btn-success btn-opacity'>Final</a>
     </div>
 
-    <h1 class='title-fase'>Quartas de Final</h1>
+    <h1 class='title-fase'>Semi Final</h1>
 
     <!-- Botão para atualizar partidas (apenas para admmaster) -->
     <?php if ($admmaster): ?>
@@ -65,20 +65,13 @@ $admmaster = isset($_SESSION['admmaster']) && $_SESSION['admmaster'] === 'S';
     ?>
 
     <div class="confronto-section">
-        <?php exibirConfronto('q1_copaelite', $conn); ?>
+        <?php exibirConfronto('s1_copaelite', $conn); ?>
     </div>
 
     <div class="confronto-section">
-        <?php exibirConfronto('q2_copaelite', $conn); ?>
+        <?php exibirConfronto('s2_copaelite', $conn); ?>
     </div>
 
-    <div class="confronto-section">
-        <?php exibirConfronto('q3_copaelite', $conn); ?>
-    </div>
-
-    <div class="confronto-section">
-        <?php exibirConfronto('q4_copaelite', $conn); ?>
-    </div>
 
     <!-- Modal de Atualização -->
     <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
@@ -89,7 +82,7 @@ $admmaster = isset($_SESSION['admmaster']) && $_SESSION['admmaster'] === 'S';
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="processamento/add_quartas.php" method="POST" enctype="multipart/form-data">
+                    <form action="processamento/add_semi.php" method="POST" enctype="multipart/form-data">
                         <?php
                         // Função para preencher os valores do formulário com base nos dados da tabela
                         function preencherForm($confronto, $conn, $index) {
@@ -105,7 +98,7 @@ $admmaster = isset($_SESSION['admmaster']) && $_SESSION['admmaster'] === 'S';
 
                             echo "
                             <div class='form-section'>
-                                <h4>Quartas $index</h4>
+                                <h4>Semi Final $index</h4>
                                 <div class='input-group'>
                                     <label class='desc-time' for='equipe1_$index'>Time 1:</label>
                                     <select class='input-time' name='equipe1_$index'>
@@ -151,10 +144,8 @@ $admmaster = isset($_SESSION['admmaster']) && $_SESSION['admmaster'] === 'S';
                         }
 
                         // Preenchendo os formulários para cada quartas
-                        preencherForm('q1_copaelite', $conn, 1);
-                        preencherForm('q2_copaelite', $conn, 2);
-                        preencherForm('q3_copaelite', $conn, 3);
-                        preencherForm('q4_copaelite', $conn, 4);
+                        preencherForm('s1_copaelite', $conn, 1);
+                        preencherForm('s2_copaelite', $conn, 2);
                         ?>
                         <button type="submit" class="btn btn-success">Salvar Confrontos</button>
                     </form>
