@@ -66,6 +66,7 @@
         #btn-desafiar{
             width: 40px;
         }
+        
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
@@ -76,7 +77,7 @@
         <span class='btn btn-default' data-bs-toggle="modal" data-bs-target="#regrasModal">Regras</span>
     </div>
     <div class="container">
-        <h1 class="mt-2">Ranking X1 Prata</h1>
+        <h1 class="mt-2">Ranking X1 Prata <img class="icon-info" src="assets/info.png" alt="Icon de Informações" data-bs-toggle="modal" data-bs-target='#infoModal'></h1>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -194,6 +195,34 @@
                                 echo "<p>Nenhum grupo de regras encontrado.</p>";
                             }
                         ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal de Informações-->
+    <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document"> >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="infoModalLabel">Informações Complementares</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <p>As posições incluem pontos automáticos aos clâs de seus respectivos jogadores.</p>
+                            <p>1º - 15 pontos<br />
+                            2º - 10 pontos<br />
+                            3º - 7 pontos<br />
+                            4º - 7 pontos<br />
+                            5º - 5 pontos<br />
+                            6º - 5 pontos<br />
+                            7º - 3 pontos<br />
+                            8º - 3 pontos<br />
+                            9º - 2 pontos<br />
+                            10º - 2 pontos<br />
+                            </p>
                     </div>
                 </div>
             </div>
