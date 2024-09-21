@@ -45,19 +45,34 @@ $resultAllClans = $conn->query($sqlAllClans);
         .alert{
             margin: 10px;
         }
+        .container-list{
+            margin: 0 auto;
+            width: 90%;
+            box-shadow: 0 4px 19px rgba(0, 0, 0, 0.9);
+            background-color: #ffab07;
+            border-radius: 15px;
+            opacity: 0.9;
+            padding: 10px;
+        }
+        td, th{
+            opacity: 0.9;
+            background-color: #ffab07 !important;
+            color: #215d94 !important;
+            border: none;
+        }
     </style>
 </head>
-<body>
+<body class="bg-1">
 <?php if ($admmaster): ?>
     <button type="button" class="btn btn-default btn-add-points" data-bs-toggle="modal" data-bs-target="#adicionarPontosModal">
         Adicionar Pontos
     </button>
 <?php endif; ?>
-    <div class="container mt-5">
-        <h2>Ranking de Clãs</h2>
+    <div class="container-list mt-5">
+        <h2 class='title-container'>Ranking de Clãs</h2>
 
         <?php if ($resultClans->num_rows > 0): ?>
-            <table class="table table-striped">
+            <table class="table table-striped tabela-list-clas">
                 <thead>
                     <tr>
                         <th>#</th>

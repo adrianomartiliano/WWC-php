@@ -4,13 +4,13 @@ include 'db/db.php';
 include 'components/menu.php';
 
 // Verifica se o usuário está logado e tem permissão
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['admcan'] !== 'S') {
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['admmaster'] !== 'S') {
     header("Location: login.php");
     exit;
 }
 
 // Consulta para obter todas as rodadas
-$sql_rounds = "SELECT DISTINCT round FROM matches ORDER BY round";
+$sql_rounds = "SELECT DISTINCT round FROM matches_x4 ORDER BY round";
 $result_rounds = $conn->query($sql_rounds);
 
 // Array para armazenar as rodadas
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
 
 
     // Atualizar os resultados da partida
-    $sql_update_match = "UPDATE matches SET score_team1 = ?, score_team2 = ?, kills_team1_1 = ?, kills_team2_1 = ?, kills_team1_2 = ?, kills_team2_2 = ?, kills_team1_3 = ?, kills_team2_3 = ? WHERE id = ?";
+    $sql_update_match = "UPDATE matches_x4 SET score_team1 = ?, score_team2 = ?, kills_team1_1 = ?, kills_team2_1 = ?, kills_team1_2 = ?, kills_team2_2 = ?, kills_team1_3 = ?, kills_team2_3 = ? WHERE id = ?";
     $stmt_update_match = $conn->prepare($sql_update_match);
     $stmt_update_match->bind_param("iiiiiiiis", 
         $score_team1, $score_team2, $kills_team1_1, $kills_team2_1, $kills_team1_2, 
@@ -46,9 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
     if ($stmt_update_match->execute()) {
         // Atualizar a pontuação das equipes
         $sql_get_scores = "SELECT t1.id AS team1_id, t2.id AS team2_id, m.score_team1, m.score_team2
-                           FROM matches m
-                           JOIN teams t1 ON m.team1_id = t1.id
-                           JOIN teams t2 ON m.team2_id = t2.id
+                           FROM matches_x4 m
+                           JOIN teams_x4 t1 ON m.team1_id = t1.id
+                           JOIN teams_x4 t2 ON m.team2_id = t2.id
                            WHERE m.id = ?";
         $stmt = $conn->prepare($sql_get_scores);
         $stmt->bind_param("i", $match_id);
@@ -62,12 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
 
         // Atualizar a pontuação das equipes apenas se a soma dos scores for maior que 1
         if (($score_team1 + $score_team2) > 1) {
-            $sql_update_team1 = "UPDATE teams SET points = points + ?, kills = kills + ? WHERE id = ?";
+            $sql_update_team1 = "UPDATE teams_x4 SET points = points + ?, kills = kills + ? WHERE id = ?";
             $stmt_team1 = $conn->prepare($sql_update_team1);
             $stmt_team1->bind_param("iii", $diff_team1, $total_kills_team1, $match_data['team1_id']);
             $stmt_team1->execute();
 
-            $sql_update_team2 = "UPDATE teams SET points = points + ?, kills = kills + ? WHERE id = ?";
+            $sql_update_team2 = "UPDATE teams_x4 SET points = points + ?, kills = kills + ? WHERE id = ?";
             $stmt_team2 = $conn->prepare($sql_update_team2);
             $stmt_team2->bind_param("iii", $diff_team2, $total_kills_team2, $match_data['team2_id']);
             $stmt_team2->execute();
@@ -198,12 +198,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
         <?php if ($selected_round): ?>
             <h2 class="mt-4">Partidas da Rodada <?php echo htmlspecialchars($selected_round); ?></h2>
             <?php
-            $sql_matches = "SELECT m.id, t1.name AS team1_name, t2.name AS team2_name, m.score_team1, m.score_team2, m.kills_team1_1, m.kills_team2_1, m.kills_team1_2, m.kills_team2_2, m.kills_team1_3, m.kills_team2_3
-                            FROM matches m
-                            JOIN teams t1 ON m.team1_id = t1.id
-                            JOIN teams t2 ON m.team2_id = t2.id
+            $sql_matches = "SELECT m.id, t1.team_name AS team1_name, t2.team_name AS team2_name, m.score_team1, m.score_team2, m.kills_team1_1, m.kills_team2_1, m.kills_team1_2, m.kills_team2_2, m.kills_team1_3, m.kills_team2_3
+                            FROM matches_x4 m
+                            JOIN teams_x4 t1 ON m.team1_id = t1.id
+                            JOIN teams_x4 t2 ON m.team2_id = t2.id
                             WHERE m.round = ?
-                            ORDER BY rand(); ";
+                            ORDER BY m.id DESC";
             $stmt = $conn->prepare($sql_matches);
             $stmt->bind_param("i", $selected_round);
             $stmt->execute();

@@ -18,6 +18,9 @@
                 <a href="teams_x4.php" class="btn btn-default" title="Equipes">
                     Equipes
                 </a>
+                <a href="torneio_x4.php" class="btn btn-default" title="Tabela">
+                    Tabelas
+                </a>
             </div>
         </div>
     </div>

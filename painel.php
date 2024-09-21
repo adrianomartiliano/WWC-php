@@ -56,17 +56,15 @@ $resultTeams = $stmt->get_result();
         <div class="card-body">
             <h5 class="card-title">Torneios e Equipes que estou participando</h5>
             <?php if ($resultTeams->num_rows > 0): ?>
-                <ul>
                     <?php while ($team = $resultTeams->fetch_assoc()): ?>
-                        <li>
-                            Equipe: <?= htmlspecialchars($team['team_name']); ?>
+                        <p>Equipe: <?= htmlspecialchars($team['team_name']); ?></p>
+                        <span>
                             <?php if ($team['member1'] == $userId): ?>
                                 <!-- Botão para Gerenciar Equipe aparece apenas para member1 -->
-                                <a href="gerenciar_equipe_x4.php?team_id=<?= $team['id']; ?>" class="btn btn-warning manage-team-btn">Gerenciar Equipe</a>
+                                <a href="gerenciar_equipe_x4.php?team_id=<?= $team['id']; ?>" class="btn btn-default manage-team-btn">Gerenciar Equipe</a>
                             <?php endif; ?>
-                        </li>
+                        </span>
                     <?php endwhile; ?>
-                </ul>
             <?php else: ?>
                 <p>Você não está inscrito em nenhuma equipe no momento.</p>
             <?php endif; ?>

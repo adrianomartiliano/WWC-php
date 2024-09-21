@@ -1,10 +1,9 @@
 <?php
-include '../db/db.php'; // Inclua a conexão com o banco de dados
+include '../db/db.php'; 
 
 if (isset($_POST['team_id'])) {
     $teamId = $_POST['team_id'];
 
-    // A equipe no PHP começa de 1, então transformamos o número do ID na consulta correta.
     $sqlTeam = "SELECT member1, member2, member3, member4 FROM teams_x4 WHERE id = ?";
     $stmt = $conn->prepare($sqlTeam);
     $stmt->bind_param('i', $teamId);

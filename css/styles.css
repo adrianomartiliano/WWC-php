@@ -3,6 +3,7 @@
 @import url('apoiadores.css'); /* Estilo para tratar cards e páginas relacionadas a apoio e doação. */
 @import url('copa-elite.css'); /* Estilo de todas páginas (fases) relacionadas a copa */
 @import url('meus_dados.css');
+@import url('tabela_de_jogos.css'); /* Estilo das tabelas dos torneios de pontos corridos */
 
 
 .bg-1 {  
@@ -31,11 +32,17 @@
     background-color: #ffab07;
     border: none;
     color: #215d94;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.btn-icon{
+    background-color: rgba(0, 0, 0, 0.0);
+    border: none;
 }
 
-.btn-success:hover {
+.btn-default:hover {
     background-color: #ffab07;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    color: white;
 }
 /* Card header */
 .card-header {
@@ -51,6 +58,11 @@
     padding: 20px;
     background: linear-gradient(145deg, #f8f8f8, #d9d9d9);
     color: #333;
+}
+
+.container-center{
+    display: flex;
+    justify-content: center;
 }
 
 .card-title {
@@ -117,3 +129,19 @@
     padding: 10px;
     border-radius: 4px;
 }
+
+.title-container{
+    text-align: center;
+    color: #215d94;
+    font-weight: bold;
+}
+/* 
+.container-list{
+    margin: 0 auto;
+    width: 90%;
+    box-shadow: 0 4px 19px rgba(0, 0, 0, 0.9);
+    background-color: #ffab07;
+    border-radius: 15px;
+    opacity: 0.9;
+    padding: 10px;
+} */

@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("sssi", $nickname, $whatsapp, $admcla, $user_id);
 
         if ($stmt->execute()) {
+            echo '<script>alert("Dados atualizados com sucesso!");</script>';
             header("Location: lista_users.php");
             exit();
         } else {

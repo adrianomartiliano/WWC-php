@@ -52,7 +52,7 @@ $user = $result->fetch_assoc();
             
             <p class="text-meus-dados"><strong>Whatsapp:</strong> <?php echo htmlspecialchars($user['whatsapp']); ?></p>
             <a href="editar_usuario.php?id=<?php echo $user['iduser']; ?>" class="btn btn-primary">Editar</a>
-            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Alterar Senha</button>
+            <button type="button" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Alterar Senha</button>
         </div>
     </div>
 
