@@ -14,6 +14,23 @@ $user_nickname = $_SESSION['nickname'];
 $cla_id = $_SESSION['cla_id'];
 $userid = $_SESSION['iduser'];
 
+// Função para verificar se já há 10 equipes inscritas
+function isTournamentFull($conn) {
+    $sql_count_teams = "SELECT COUNT(*) as total_teams FROM teams_x4";
+    $result_count = $conn->query($sql_count_teams);
+    $row = $result_count->fetch_assoc();
+    return $row['total_teams'] >= 10;  // Limite de 10 equipes
+}
+
+// Verifica se o torneio já atingiu o limite de equipes
+if (isTournamentFull($conn)) {
+    echo '<script>
+            alert("O torneio atingiu o limite de 10 equipes. Não há mais vagas disponíveis.");
+            window.location.href = "index.php";  // Redireciona para a página inicial
+          </script>';
+    exit;
+}
+
 // Função para verificar se um usuário já está inscrito em uma equipe
 function isUserInTeam($conn, $userid) {
     $sql_check_team = "
@@ -73,6 +90,7 @@ if (isUserInTeam($conn, $userid)) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

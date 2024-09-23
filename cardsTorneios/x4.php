@@ -1,3 +1,20 @@
+<?php
+
+    if ($conn->connect_error) {
+        die("Falha na conexão: " . $conn->connect_error);
+    }
+
+    // Consulta para contar as equipes inscritas
+    $sql = "SELECT COUNT(*) as total FROM teams_x4";
+    $result = $conn->query($sql);
+
+    // Verifica a quantidade de equipes
+    $row = $result->fetch_assoc();
+    $total_teams = $row['total'];
+
+    // Define o status do botão de inscrição
+    $inscricao_habilitada = $total_teams < 10;
+?>
 
 <body class="bg-1">
     <div class="card border-secondary mb-3">
@@ -6,11 +23,11 @@
         </div>
         
         <div class="card-body">
-            <h5 class="card-title">Inscrições Liberadas</h5>
+            <h5 class="card-title">Inscrições <?php echo $inscricao_habilitada ? 'Liberadas' : 'Encerradas'; ?></h5>
             <p class="card-text">Prepare-se para a competição mais acirrada do cenário WW2! Neste torneio de pontos corridos, equipes de 4 jogadores vão se enfrentar em batalhas intensas, onde cada tiro conta e a estratégia é tudo. Somente os mais habilidosos e coordenados alcançarão o topo. Afie sua mira, fortaleça sua equipe e domine a arena. A glória aguarda aqueles que forem implacáveis!</p>
             <div>
-                <a href="inscricao_x4.php" class="btn btn-default" title="Inscrição">
-                    Inscrição
+                <a href="inscricao_x4.php" class="btn btn-default <?php echo $inscricao_habilitada ? '' : 'disabled'; ?>" title="Inscrição">
+                    <?php echo $inscricao_habilitada ? 'Inscrição' : 'Inscrição Encerrada'; ?>
                 </a>
                 <a href="#" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#regrasModal" title="Regras">
                     Regras
@@ -24,6 +41,8 @@
             </div>
         </div>
     </div>
+</body>
+
 
     <!--Modal de Informações-->
     <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
