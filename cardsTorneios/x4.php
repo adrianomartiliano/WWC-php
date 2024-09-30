@@ -38,6 +38,13 @@
                 <a href="torneio_x4.php" class="btn btn-default" title="Tabela">
                     Tabelas
                 </a>
+                <?php
+                    // Botão de Prazos apenas para ADM
+                    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['admmaster'] === 'S') {
+                        echo '<a href="painel_prazo_final.php" class="btn btn-default" title="Tabela">Prazos</a>';
+                    }
+                ?>
+
             </div>
         </div>
     </div>
