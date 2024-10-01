@@ -184,11 +184,19 @@ if ($viewType === 'players') {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                            <p>Brasil <br />
-                            Pix: 43999929497</p>
+                        <p>Brasil <br />
+                            Pix: <span id="pix-value">43999929497</span>
+                            <img id="icon-copy" src="assets/copy-icon.png" class="icon-info" style="cursor: pointer;" onclick="copiarPix()">
+                            <span id="mensagem-copiado" style="margin-left: 10px; color: green;"></span>
+                        </p>
                             <p>Fora do Brasil <br />
-                            PayPal: (consulte o e-mail para transferência)</p>
-                            <p>Mercado Pago: <a href='https://link.mercadopago.com.br/ww2cup' target='_blank'>Clique Aqui!</a></p>
+                                PayPal: (consulte o e-mail para transferência)
+                            </p>
+                            <p>
+                                Mercado Pago: 
+                                <a href='https://link.mercadopago.com.br/ww2cup' target='_blank'>
+                                    Clique Aqui!</a>
+                            </p>
                             <br /><br />
                             
                             
@@ -204,5 +212,27 @@ if ($viewType === 'players') {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        async function copiarPix() {
+            // Seleciona o valor do PIX
+            const pix = document.getElementById('pix-value').textContent;
+
+            try {
+                // Usa a API Clipboard para copiar o valor
+                await navigator.clipboard.writeText(pix);
+
+                // Exibe a mensagem "Copiado" ao lado da imagem
+                const mensagemCopiado = document.getElementById('mensagem-copiado');
+                mensagemCopiado.textContent = "Copiado!";
+
+                // Remove a mensagem após 2 segundos
+                setTimeout(() => {
+                    mensagemCopiado.textContent = "";
+                }, 4000);
+            } catch (err) {
+                console.error('Erro ao copiar o PIX: ', err);
+            }
+        }
+</script>
 </body>
 </html>
