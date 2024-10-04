@@ -221,11 +221,9 @@ if ($viewType === 'players') {
                 // Usa a API Clipboard para copiar o valor
                 await navigator.clipboard.writeText(pix);
 
-                // Exibe a mensagem "Copiado" ao lado da imagem
                 const mensagemCopiado = document.getElementById('mensagem-copiado');
                 mensagemCopiado.textContent = "Copiado!";
 
-                // Remove a mensagem após 2 segundos
                 setTimeout(() => {
                     mensagemCopiado.textContent = "";
                 }, 4000);
