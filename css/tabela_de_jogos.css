@@ -66,3 +66,8 @@
 .form-select-round > button:hover {
     background-color: #45a049;
 }
+
+.team-link{
+    text-decoration: none;
+    color: #215d94;
+}

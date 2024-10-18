@@ -19,11 +19,11 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
 </head>
 <body class='bg-2'>
     <div class='menu-de-fases'>
-        <a class="btn btn-default" href="#">Classificação</a>
+        <a class="btn btn-default" href="classificacao_x4.php">Classificação</a>
     </div>
     
     <?php
-    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['admcan'] === 'S') {
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true && $_SESSION['admmaster'] === 'S') {
         echo "
             <div class='menu-de-fases'>
                 <a class='btn btn-default' href='inserir_resultados_x4.php'>Inserir Resultados</a>
@@ -36,7 +36,7 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
     <form class='form-select-round' method="GET" action="">
         <select name="round" id="round" onchange="this.form.submit()">
             <?php 
-                for ($i = 1; $i <= 11; $i++) {
+                for ($i = 1; $i <= 17; $i++) {
                     $selected = $i == $selected_round ? 'selected' : '';
                     echo "<option value='$i' $selected>Rodada $i</option>";
                 }
@@ -46,7 +46,7 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
 
     <?php
     // Consulta para recuperar a rodada e partidas com base na seleção
-    $sql = "SELECT m.round, t1.team_name AS team1_name, t2.team_name AS team2_name, m.score_team1, m.score_team2, m.img_batalha1, m.img_batalha2, m.img_batalha3
+    $sql = "SELECT m.round, t1.team_name AS team1_name, t2.team_name AS team2_name, m.score_team1, m.score_team2, m.img_batalha1, m.img_batalha2, m.img_batalha3, t1.id AS team1_id, t2.id AS team2_id
             FROM matches_x4 m
             JOIN teams_x4 t1 ON m.team1_id = t1.id
             JOIN teams_x4 t2 ON m.team2_id = t2.id
@@ -62,8 +62,14 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo "<div class='confronto-section'>";
-            echo "<p class='flex-between'><span>" . htmlspecialchars($row['team1_name'], ENT_QUOTES, 'UTF-8') . "</span> <span class='placar'>" . htmlspecialchars($row['score_team1'], ENT_QUOTES, 'UTF-8') . "</span></p>";
-            echo "<p class='flex-between'><span>" . htmlspecialchars($row['team2_name'], ENT_QUOTES, 'UTF-8') . "</span> <span class='placar'>" . htmlspecialchars($row['score_team2'], ENT_QUOTES, 'UTF-8') . "</span></p>";
+            echo "<p class='flex-between'>
+                    <a href='#' class='team-link' data-bs-toggle='modal' data-bs-target='#teamModal' data-team-id='" . $row['team1_id'] . "'>" . htmlspecialchars($row['team1_name'], ENT_QUOTES, 'UTF-8') . "</a> 
+                    <span class='placar'>" . htmlspecialchars($row['score_team1'], ENT_QUOTES, 'UTF-8') . "</span>
+                  </p>";
+            echo "<p class='flex-between'>
+                    <a href='#' class='team-link' data-bs-toggle='modal' data-bs-target='#teamModal' data-team-id='" . $row['team2_id'] . "'>" . htmlspecialchars($row['team2_name'], ENT_QUOTES, 'UTF-8') . "</a> 
+                    <span class='placar'>" . htmlspecialchars($row['score_team2'], ENT_QUOTES, 'UTF-8') . "</span>
+                  </p>";
 
             // Exibir ícones de imagens, se houver imagens no banco
             echo "<div class='conteiner-icons-images'>";
@@ -87,7 +93,7 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
             echo "</div>";
         }
     } else {
-        echo "Nenhuma partida encontrada para a rodada $selected_round.";
+        echo "<p class='msg-rodada-n-liberada'>Rodada $selected_round ainda não liberada!</p>";
     }
 
     $stmt->close();
@@ -109,6 +115,21 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
         </div>
     </div>
 
+    <!-- Modal para exibir informações do time -->
+    <div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="teamModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="teamModalLabel">Equipe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="teamModalBody">
+                    <!-- Conteúdo será preenchido via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
@@ -122,6 +143,25 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
 
             var modal = $(this);
             modal.find('#modalImage').attr('src', imageUrl); // Atualizar o src da imagem no modal
+        });
+
+        // Carregar informações do time no modal
+        $('#teamModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Botão que acionou o modal
+            var teamId = button.data('team-id'); // Recuperar o ID do time
+
+            // Requisitar dados do time via AJAX
+            $.ajax({
+                url: 'get_team_details.php',
+                type: 'GET',
+                data: { team_id: teamId },
+                success: function(data) {
+                    $('#teamModalBody').html(data);
+                },
+                error: function() {
+                    $('#teamModalBody').html('<p>Erro ao carregar informações do time.</p>');
+                }
+            });
         });
     </script>
 </body>

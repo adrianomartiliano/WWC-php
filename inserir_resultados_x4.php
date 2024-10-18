@@ -29,20 +29,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
     $match_id = $_POST['match_id'];
     $score_team1 = $_POST['score_team1'];
     $score_team2 = $_POST['score_team2'];
-    $kills_team1_1 = $_POST['kills_team1_1'];
-    $kills_team1_2 = $_POST['kills_team1_2'];
-    $kills_team1_3 = $_POST['kills_team1_3'];
-    $kills_team2_1 = $_POST['kills_team2_1'];
-    $kills_team2_2 = $_POST['kills_team2_2'];
-    $kills_team2_3 = $_POST['kills_team2_3'];
+    $observation = $_POST['observation'];
 
+    // Coleta das kills de cada jogador para os dois times
+    $kills_team1 = [];
+    $kills_team2 = [];
+    for ($i = 1; $i <= 12; $i++) {
+        $kills_team1[] = $_POST["kills_team1_$i"];
+        $kills_team2[] = $_POST["kills_team2_$i"];
+    }
 
-    // Atualizar os resultados da partida
-    $sql_update_match = "UPDATE matches_x4 SET score_team1 = ?, score_team2 = ?, kills_team1_1 = ?, kills_team2_1 = ?, kills_team1_2 = ?, kills_team2_2 = ?, kills_team1_3 = ?, kills_team2_3 = ? WHERE id = ?";
+    $sql_update_match = "UPDATE matches_x4 
+                        SET 
+                        score_team1 = ?, score_team2 = ?, 
+                        kills_team1_1 = ?, kills_team1_2 = ?, kills_team1_3 = ?, kills_team1_4 = ?, 
+                        kills_team1_5 = ?, kills_team1_6 = ?, kills_team1_7 = ?, kills_team1_8 = ?, 
+                        kills_team1_9 = ?, kills_team1_10 = ?, kills_team1_11 = ?, kills_team1_12 = ?, 
+                        kills_team2_1 = ?, kills_team2_2 = ?, kills_team2_3 = ?, kills_team2_4 = ?, 
+                        kills_team2_5 = ?, kills_team2_6 = ?, kills_team2_7 = ?, kills_team2_8 = ?, 
+                        kills_team2_9 = ?, kills_team2_10 = ?, kills_team2_11 = ?, kills_team2_12 = ?,
+                        observation = ?  
+                        WHERE id = ?";
+
     $stmt_update_match = $conn->prepare($sql_update_match);
-    $stmt_update_match->bind_param("iiiiiiiis", 
-        $score_team1, $score_team2, $kills_team1_1, $kills_team2_1, $kills_team1_2, 
-        $kills_team2_2, $kills_team1_3, $kills_team2_3, $match_id);
+    $stmt_update_match->bind_param(
+        "iiiiiiiiiiiiiiiiiiiiiiiiiisi", 
+        $score_team1, $score_team2, 
+        $kills_team1[0], $kills_team1[1], $kills_team1[2], $kills_team1[3], $kills_team1[4], $kills_team1[5], 
+        $kills_team1[6], $kills_team1[7], $kills_team1[8], $kills_team1[9], $kills_team1[10], $kills_team1[11],
+        $kills_team2[0], $kills_team2[1], $kills_team2[2], $kills_team2[3], $kills_team2[4], $kills_team2[5], 
+        $kills_team2[6], $kills_team2[7], $kills_team2[8], $kills_team2[9], $kills_team2[10], $kills_team2[11],
+        $observation,
+        $match_id // Adicionando o match_id aqui
+    );
+    
+
     if ($stmt_update_match->execute()) {
         // Atualizar a pontuação das equipes
         $sql_get_scores = "SELECT t1.id AS team1_id, t2.id AS team2_id, m.score_team1, m.score_team2
@@ -59,6 +80,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
         // Calcular a diferença de pontuação
         $diff_team1 = $score_team1 - $match_data['score_team1'];
         $diff_team2 = $score_team2 - $match_data['score_team2'];
+
+        // Somar as kills
+        $total_kills_team1 = array_sum($kills_team1);
+        $total_kills_team2 = array_sum($kills_team2);
 
         // Atualizar a pontuação das equipes apenas se a soma dos scores for maior que 1
         if (($score_team1 + $score_team2) > 1) {
@@ -79,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -114,15 +140,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            font-size: 1.1em;
-            cursor: pointer;
         }
         .match-container {
             margin-bottom: 20px;
@@ -198,12 +215,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
         <?php if ($selected_round): ?>
             <h2 class="mt-4">Partidas da Rodada <?php echo htmlspecialchars($selected_round); ?></h2>
             <?php
-            $sql_matches = "SELECT m.id, t1.team_name AS team1_name, t2.team_name AS team2_name, m.score_team1, m.score_team2, m.kills_team1_1, m.kills_team2_1, m.kills_team1_2, m.kills_team2_2, m.kills_team1_3, m.kills_team2_3
-                            FROM matches_x4 m
-                            JOIN teams_x4 t1 ON m.team1_id = t1.id
-                            JOIN teams_x4 t2 ON m.team2_id = t2.id
-                            WHERE m.round = ?
-                            ORDER BY m.id DESC";
+            $sql_matches = "SELECT m.id, t1.team_name AS team1_name, t2.team_name AS team2_name, m.score_team1, m.score_team2, 
+            m.kills_team1_1, m.kills_team2_1, m.kills_team1_2, m.kills_team2_2, m.kills_team1_3, m.kills_team2_3, 
+            m.kills_team1_4, m.kills_team2_4, m.kills_team1_5, m.kills_team2_5, m.kills_team1_6, m.kills_team2_6, 
+            m.kills_team1_7, m.kills_team2_7, m.kills_team1_8, m.kills_team2_8, m.kills_team1_9, m.kills_team2_9, 
+            m.kills_team1_10, m.kills_team2_10, m.kills_team1_11, m.kills_team2_11, m.kills_team1_12, m.kills_team2_12,
+            m.observation
+            FROM matches_x4 m
+            JOIN teams_x4 t1 ON m.team1_id = t1.id
+            JOIN teams_x4 t2 ON m.team2_id = t2.id
+            WHERE m.round = ?
+            ORDER BY m.id DESC";
             $stmt = $conn->prepare($sql_matches);
             $stmt->bind_param("i", $selected_round);
             $stmt->execute();
@@ -218,39 +240,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
                     <div class="match-container <?php echo $class; ?>">
                         <p><?php echo htmlspecialchars($row['team1_name']); ?> vs <?php echo htmlspecialchars($row['team2_name']); ?> - Placar: <?php echo htmlspecialchars($row['score_team1']); ?> - <?php echo htmlspecialchars($row['score_team2']); ?></p>
                         <button type="button" onclick="document.getElementById('form-<?php echo $row['id']; ?>').style.display='block'">Atualizar Resultado</button>
+                        <!-- Formulário para atualizar o resultado de uma partida -->
                         <form method="post" id="form-<?php echo $row['id']; ?>">
                             <input type="hidden" name="match_id" value="<?php echo $row['id']; ?>">
                             <input type="hidden" name="update_result" value="1">
+
                             <div class="form-group">
                                 <label for="score_team1"><span class="text_title">Placar</span> - <?php echo htmlspecialchars($row['team1_name']); ?></label>
                                 <input type="number" class="form-control" id="score_team1" name="score_team1" value="<?php echo htmlspecialchars($row['score_team1']); ?>" required>
                             </div>
+
                             <div class="form-group">
                                 <label for="score_team2"><span class="text_title">Placar</span> - <?php echo htmlspecialchars($row['team2_name']); ?></label>
                                 <input type="number" class="form-control" id="score_team2" name="score_team2" value="<?php echo htmlspecialchars($row['score_team2']); ?>" required>
                             </div>
-                            <div class="form-group">
-                                <label for="kills_team1_1"><span class="text_title">Kills</span> -<?php echo htmlspecialchars($row['team1_name']); ?></label>
-                                <input type="number" class="form-control" id="kills_team1_1" name="kills_team1_1" value="<?php echo htmlspecialchars($row['kills_team1_1']); ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="kills_team1_2" name="kills_team1_2" value="<?php echo htmlspecialchars($row['kills_team1_2']); ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="kills_team1_3" name="kills_team1_3" value="<?php echo htmlspecialchars($row['kills_team1_3']); ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="kills_team2_1"><span class="text_title">Kills</span> -<?php echo htmlspecialchars($row['team2_name']); ?></label>
-                                <input type="number" class="form-control" id="kills_team2_1" name="kills_team2_1" value="<?php echo htmlspecialchars($row['kills_team2_1']); ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="kills_team2_2" name="kills_team2_2" value="<?php echo htmlspecialchars($row['kills_team2_2']); ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="number" class="form-control" id="kills_team2_3" name="kills_team2_3" value="<?php echo htmlspecialchars($row['kills_team2_3']); ?>" required>
-                            </div>
-                            <button type="submit" name="update_result" class="btn btn-primary">Salvar</button>
-                        </form>
+
+                            <div class="team-form-group">
+    <div>
+        <label><span class="text_title">Kills</span> - <?php echo htmlspecialchars($row['team1_name']); ?></label>
+        <?php for ($i = 1; $i <= 12; $i++): ?>
+            <?php 
+            // Exibe o rótulo de acordo com o número do input
+            if ($i == 1) {
+                echo "<p>Partida 1</p>";
+            } elseif ($i == 5) {
+                echo "<p>Partida 2</p>";
+            } elseif ($i == 9) {
+                echo "<p>Partida 3</p>";
+            }
+            ?>
+            <input type="number" class="form-control" name="kills_team1_<?php echo $i; ?>" value="<?php echo htmlspecialchars($row['kills_team1_' . $i]); ?>" required>
+        <?php endfor; ?>
+    </div>
+
+    <div>
+        <label><span class="text_title">Kills</span> - <?php echo htmlspecialchars($row['team2_name']); ?></label>
+        <?php for ($i = 1; $i <= 12; $i++): ?>
+            <?php 
+            // Exibe o rótulo de acordo com o número do input
+            if ($i == 1) {
+                echo "<p>Partida 1</p>";
+            } elseif ($i == 5) {
+                echo "<p>Partida 2</p>";
+            } elseif ($i == 9) {
+                echo "<p>Partida 3</p>";
+            }
+            ?>
+            <input type="number" class="form-control" name="kills_team2_<?php echo $i; ?>" value="<?php echo htmlspecialchars($row['kills_team2_' . $i]); ?>" required>
+        <?php endfor; ?>
+    </div>
+</div>
+        <div class="form-group">
+            <label for="observation">Observação</label>
+            <textarea class="form-control" id="observation" name="observation" rows="3">
+                <?php echo htmlspecialchars($row['observation']); ?>
+            </textarea>
+        </div>
+
+
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        </form>
+
                     </div>
                 <?php endwhile; ?>
             <?php else: ?>

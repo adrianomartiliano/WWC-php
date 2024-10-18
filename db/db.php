@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "wwc";
+$servername = "auth-db1186.hstgr.io";
+$username = "u516367395_teste";
+$password = "9Vk;eFVRn";
+$dbname = "u516367395_teste";
 
 // Criar conexão
 $conn = new mysqli($servername, $username, $password, $dbname);

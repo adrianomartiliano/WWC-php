@@ -135,6 +135,17 @@
     color: #215d94;
     font-weight: bold;
 }
+
+.msg-rodada-n-liberada{
+    background-color:#ffab07;
+    width: 70%;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    color: #215d94;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 /* 
 .container-list{
     margin: 0 auto;
