@@ -146,6 +146,11 @@
     border-radius: 5px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+.observation-text{
+    font-size: 13px !important;
+    text-align: justify !important;
+    color: #e0453d !important;
+}
 /* 
 .container-list{
     margin: 0 auto;
