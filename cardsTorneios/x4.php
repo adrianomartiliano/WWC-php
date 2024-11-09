@@ -46,6 +46,7 @@ $inscricao_habilitada = $total_teams < 14;
                         if ($_SESSION['admmaster'] === 'S') {
                             echo '<a href="painel_prazo_final.php" class="btn btn-default" title="prazos">Prazos</a>';
                             echo '<a href="painel_salvar_confrontos_x4.php" class="btn btn-default" title="Partidas">Partidas</a>';
+                            echo '<a href="partidas_pendentes_x4.php" class="btn btn-default" title="A-fazer">Pendentes</a>';
                         }
                 
                         // Verifica se o usuário é member1 em alguma equipe
