@@ -109,14 +109,14 @@ if ($result_teams->num_rows > 0) {
                 <label for="round">Escolha a Rodada</label>
                 <select class="form-control form-select" id="round" name="round" required>
                     <option value="">Selecione a Rodada</option>
-                    <?php for ($i = 1; $i <= 17; $i++) : ?>
+                    <?php for ($i = 1; $i <= 13; $i++) : ?>
                         <option value="<?php echo $i; ?>">Rodada <?php echo $i; ?></option>
                     <?php endfor; ?>
                 </select>
             </div>
 
             <div id="cards-container" style="display:none;">
-                <?php for ($i = 1; $i <= 9; $i++) : ?>
+                <?php for ($i = 1; $i <= 7; $i++) : ?>
                     <div class="card">
                         <div class="card-header">Confronto <?php echo $i; ?></div>
                         <div class="card-body">

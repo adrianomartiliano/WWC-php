@@ -38,7 +38,6 @@
     ) m ON t.id = m.team_id
     SET t.points = COALESCE(m.total_points, 0),
         t.kills = COALESCE(m.total_kills, 0);
-
     ";
 
     if ($conn->query($sql_update_totals) === TRUE) {
@@ -113,16 +112,18 @@
         <a id="btn-voltar" class="btn btn-default" href="javascript:history.back()">Voltar</a>
 
         <?php
-            // Consulta para recuperar a classificação dos times ordenados por pontos
-            $sql = "SELECT t.team_name, t.points, t.kills 
-                    FROM teams_x4 t 
-                    ORDER BY t.points DESC, t.kills DESC";
+            // Consulta para recuperar a classificação dos times, incluindo a contagem de partidas realizadas
+            $sql = "
+            SELECT t.team_name, t.points, t.kills, 
+                (SELECT COUNT(*) FROM matches_x4 WHERE (team1_id = t.id OR team2_id = t.id) AND realizada = 'S') AS total_realizadas
+            FROM teams_x4 t 
+            ORDER BY t.points DESC, t.kills DESC";
 
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
                 echo "<table>";
-                echo "<tr><th>#</th><th>Equipe</th><th>Pontos</th><th>Kills</th></tr>";
+                echo "<tr><th>#</th><th>Equipe</th><th>Pontos</th><th>Kills</th><th>J</th></tr>";
 
                 $position = 1;
 
@@ -132,6 +133,7 @@
                             <td>" . htmlspecialchars($row['team_name']) . "</td>
                             <td>" . htmlspecialchars($row['points']) . "</td>
                             <td>" . htmlspecialchars($row['kills']) . "</td>
+                            <td>" . htmlspecialchars($row['total_realizadas']) . "</td>
                         </tr>";
                     $position++;
                 }

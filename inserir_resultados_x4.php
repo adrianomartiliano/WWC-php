@@ -30,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
     $score_team1 = $_POST['score_team1'];
     $score_team2 = $_POST['score_team2'];
     $observation = $_POST['observation'];
+    $libera_imagem = $_POST['libera_imagem'];
+    $realizada = $_POST['realizada'];
 
     // Coleta das kills de cada jogador para os dois times
     $kills_team1 = [];
@@ -48,17 +50,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
                         kills_team2_1 = ?, kills_team2_2 = ?, kills_team2_3 = ?, kills_team2_4 = ?, 
                         kills_team2_5 = ?, kills_team2_6 = ?, kills_team2_7 = ?, kills_team2_8 = ?, 
                         kills_team2_9 = ?, kills_team2_10 = ?, kills_team2_11 = ?, kills_team2_12 = ?,
+                        realizada = ?, libera_imagem = ?,
                         observation = ?  
                         WHERE id = ?";
 
     $stmt_update_match = $conn->prepare($sql_update_match);
     $stmt_update_match->bind_param(
-        "iiiiiiiiiiiiiiiiiiiiiiiiiisi", 
+        "iiiiiiiiiiiiiiiiiiiiiiiiiisssi", 
         $score_team1, $score_team2, 
         $kills_team1[0], $kills_team1[1], $kills_team1[2], $kills_team1[3], $kills_team1[4], $kills_team1[5], 
         $kills_team1[6], $kills_team1[7], $kills_team1[8], $kills_team1[9], $kills_team1[10], $kills_team1[11],
         $kills_team2[0], $kills_team2[1], $kills_team2[2], $kills_team2[3], $kills_team2[4], $kills_team2[5], 
         $kills_team2[6], $kills_team2[7], $kills_team2[8], $kills_team2[9], $kills_team2[10], $kills_team2[11],
+        $realizada, $libera_imagem,
         $observation,
         $match_id // Adicionando o match_id aqui
     );
@@ -180,8 +184,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
             width: 48%;
         }
         .match-container.updated {
-            background-color: #d4edda; /* Verde claro */
-            border-color: #c3e6cb; /* Verde mais escuro */
+            background-color: #d4edda;
+            border-color: #c3e6cb; 
         }
         .text_title{
             font-size: 25px;
@@ -220,6 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
             m.kills_team1_4, m.kills_team2_4, m.kills_team1_5, m.kills_team2_5, m.kills_team1_6, m.kills_team2_6, 
             m.kills_team1_7, m.kills_team2_7, m.kills_team1_8, m.kills_team2_8, m.kills_team1_9, m.kills_team2_9, 
             m.kills_team1_10, m.kills_team2_10, m.kills_team1_11, m.kills_team2_11, m.kills_team1_12, m.kills_team2_12,
+            m.realizada, m.libera_imagem,
             m.observation
             FROM matches_x4 m
             JOIN teams_x4 t1 ON m.team1_id = t1.id
@@ -296,6 +301,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_result'])) {
                 <?php echo htmlspecialchars($row['observation']); ?>
             </textarea>
         </div>
+        <div class="form-group">
+            <label for="liberarImagens">Liberar Imagens</label>
+            <select id="libera_imagem" name="libera_imagem" class="form-control">
+                <option value="N" <?php echo ($row['libera_imagem'] == 'N') ? 'selected' : ''; ?>>Não</option>
+                <option value="S" <?php echo ($row['libera_imagem'] == 'S') ? 'selected' : ''; ?>>Sim</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="realizada">Realizada</label>
+            <select id="realizada" name="realizada" class="form-control">
+                <option value="N" <?php echo ($row['realizada'] == 'N') ? 'selected' : ''; ?>>Não</option>
+                <option value="S" <?php echo ($row['realizada'] == 'S') ? 'selected' : ''; ?>>Sim</option>
+            </select>
+        </div>
+
+        
 
 
             <button type="submit" class="btn btn-primary">Atualizar</button>

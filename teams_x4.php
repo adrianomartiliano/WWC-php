@@ -39,18 +39,19 @@ $resultTeams = $conn->query($sqlTeams);
                 $statusClass = ($team['status'] == 'C') ? 'status-c' : '';
                 
                 echo "
-                <div class='accordion-item'>
-                    <h2 class='accordion-header ' id='heading$index'>
-                        <button class='accordion-button collapsed $statusClass' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$index' aria-expanded='false' aria-controls='collapse$index'>
-                            {$team['team_name']}
-                        </button>
-                    </h2>
-                    <div id='collapse$index' class='accordion-collapse collapse' aria-labelledby='heading$index' data-bs-parent='#accordionTeams'>
-                        <div class='accordion-body'>
-                            <p>Carregando integrantes...</p>
-                        </div>
-                    </div>
-                </div>";
+<div class='accordion-item'>
+    <h2 class='accordion-header ' id='heading$index'>
+        <button class='accordion-button collapsed $statusClass' type='button' data-bs-toggle='collapse' data-bs-target='#collapse$index' aria-expanded='false' aria-controls='collapse$index' data-team-id='{$team['id']}'>
+            {$team['team_name']}
+        </button>
+    </h2>
+    <div id='collapse$index' class='accordion-collapse collapse' aria-labelledby='heading$index' data-bs-parent='#accordionTeams'>
+        <div class='accordion-body'>
+            <p>Carregando integrantes...</p>
+        </div>
+    </div>
+</div>";
+
             }
         } else {
             echo "<p>Nenhuma equipe encontrada.</p>";
@@ -63,25 +64,23 @@ $resultTeams = $conn->query($sqlTeams);
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    $(document).ready(function () {
-        $('.accordion-button').on('click', function () {
-            var button = $(this);
-            var collapse = button.closest('.accordion-item').find('.accordion-collapse');
-            var teamId = button.closest('.accordion-item').find('.accordion-button').attr('aria-controls').replace('collapse', '');
+    $('.accordion-button').on('click', function () {
+    var button = $(this);
+    var collapse = button.closest('.accordion-item').find('.accordion-collapse');
+    var teamId = button.data('team-id'); // Agora pegando diretamente o ID da equipe
 
-            if (!collapse.attr('data-loaded')) {
-                $.ajax({
-                    url: 'processamento/fetch_team_members_x4.php', // Arquivo que busca membros da equipe
-                    method: 'POST',
-                    data: { team_id: teamId },
-                    success: function (response) {
-                        collapse.find('.accordion-body').html(response);
-                        collapse.attr('data-loaded', true); // Marca como carregado
-                    }
-                });
+    if (!collapse.attr('data-loaded')) {
+        $.ajax({
+            url: 'processamento/fetch_team_members_x4.php',
+            method: 'POST',
+            data: { team_id: teamId },
+            success: function (response) {
+                collapse.find('.accordion-body').html(response);
+                collapse.attr('data-loaded', true); // Marca como carregado
             }
         });
-    });
+    }
+});
 </script>
 
 </body>

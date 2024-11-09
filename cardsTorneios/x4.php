@@ -1,5 +1,5 @@
 <?php
-
+include 'db/db.php';
 // Verifica a conexão com o banco de dados
 if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
@@ -14,7 +14,7 @@ $row = $result->fetch_assoc();
 $total_teams = $row['total'];
 
 // Define o status do botão de inscrição
-$inscricao_habilitada = $total_teams < 18;
+$inscricao_habilitada = $total_teams < 14;
 
 ?>
 
@@ -26,15 +26,16 @@ $inscricao_habilitada = $total_teams < 18;
         </div>
         
         <div class="card-body">
-            <h5 class="card-title">Inscrições <?php echo $inscricao_habilitada ? 'Liberadas' : 'Encerradas'; ?></h5>
+            <h5 class="card-title">Torneio em Andamento</h5>
+            <!-- <h5 class="card-title">Inscrições <?php echo $inscricao_habilitada ? 'Liberadas' : 'Encerradas'; ?></h5> -->
             <p class="card-text">
                 Prepare-se para a competição mais acirrada do cenário WW2! Neste torneio de pontos corridos, equipes de 4 jogadores vão se enfrentar em batalhas intensas, onde cada tiro conta e a estratégia é tudo. Somente os mais habilidosos e coordenados alcançarão o topo. Afie sua mira, fortaleça sua equipe e domine a arena. A glória aguarda aqueles que forem implacáveis!
             </p>
             <div>
-                <a href="inscricao_x4.php" class="btn btn-default <?php echo $inscricao_habilitada ? '' : 'disabled'; ?>" title="Inscrição">
+                <!-- <a href="inscricao_x4.php" class="btn btn-default <?php echo $inscricao_habilitada ? '' : 'disabled'; ?>" title="Inscrição">
                     <?php echo $inscricao_habilitada ? 'Inscrição' : 'Inscrição Encerrada'; ?>
-                </a>
-                <a href="#" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#regrasModal" title="Regras">Regras</a><br />
+                </a> -->
+                <a href="#" class="btn btn-default" data-bs-toggle="modal" data-bs-target="#regrasModal" title="Regras">Regras</a>
                 <a href="teams_x4.php" class="btn btn-default" title="Equipes">Equipes</a>
                 <a href="torneio_x4.php" class="btn btn-default" title="Tabela">Tabelas</a>
 
@@ -43,7 +44,7 @@ $inscricao_habilitada = $total_teams < 18;
                         
                         // Exibe botões de Prazos e Partidas apenas para o admin master
                         if ($_SESSION['admmaster'] === 'S') {
-                            echo '<a href="painel_prazo_final.php" class="btn btn-default" title="Tabela">Prazos</a>';
+                            echo '<a href="painel_prazo_final.php" class="btn btn-default" title="prazos">Prazos</a>';
                             echo '<a href="painel_salvar_confrontos_x4.php" class="btn btn-default" title="Partidas">Partidas</a>';
                         }
                 
@@ -56,7 +57,7 @@ $inscricao_habilitada = $total_teams < 18;
                         $result = $stmt->get_result();
                 
                         if ($result->num_rows > 0) {   
-                            echo '<a href="painel.php" class="btn btn-default" title="Tabela">Enviar Resultados</a>';
+                            echo '<a href="painel.php" class="btn btn-default" title="EnviarResultados">Enviar Resultados</a>';
                         }
                 
                         $stmt->close();

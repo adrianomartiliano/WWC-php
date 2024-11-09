@@ -13,26 +13,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['round']) && isset($_PO
     $team1_ids = $_POST['team1_id'];
     $team2_ids = $_POST['team2_id'];
 
-    if (count($team1_ids) === count($team2_ids) && count($team1_ids) == 9) {
+    if (count($team1_ids) === count($team2_ids) && count($team1_ids) == 7) { // Ajuste para 7 confrontos
         // Percorre os confrontos e faz as inserções/atualizações no banco de dados
-        for ($i = 0; $i < 9; $i++) {
+        for ($i = 0; $i < 7; $i++) {
             $team1_id = intval($team1_ids[$i]);
             $team2_id = intval($team2_ids[$i]);
 
             // Verifica se os times são válidos
             if ($team1_id > 0 && $team2_id > 0 && $team1_id !== $team2_id) {
-                // Verifica se já existe uma partida para a rodada
-                $sql_check = "SELECT id FROM matches_x4 WHERE round = ? AND team1_id = ? AND team2_id = ?";
+                // Verifica se já existe uma partida para a rodada (considerando ambas direções)
+                $sql_check = "SELECT id FROM matches_x4 WHERE round = ? AND ((team1_id = ? AND team2_id = ?) OR (team1_id = ? AND team2_id = ?))";
                 if ($stmt_check = $conn->prepare($sql_check)) {
-                    $stmt_check->bind_param("iii", $round, $team1_id, $team2_id);
+                    $stmt_check->bind_param("iiiii", $round, $team1_id, $team2_id, $team2_id, $team1_id);
                     $stmt_check->execute();
                     $stmt_check->store_result();
 
                     if ($stmt_check->num_rows > 0) {
                         // Atualiza a partida existente
-                        $sql_update = "UPDATE matches_x4 SET team1_id = ?, team2_id = ? WHERE round = ? AND team1_id = ? AND team2_id = ?";
+                        $stmt_check->bind_result($match_id);
+                        $stmt_check->fetch();
+                        $sql_update = "UPDATE matches_x4 SET team1_id = ?, team2_id = ? WHERE id = ?";
                         if ($stmt_update = $conn->prepare($sql_update)) {
-                            $stmt_update->bind_param("iiiii", $team1_id, $team2_id, $round, $team1_id, $team2_id);
+                            $stmt_update->bind_param("iii", $team1_id, $team2_id, $match_id);
                             if (!$stmt_update->execute()) {
                                 echo "Erro ao atualizar o confronto: " . $stmt_update->error;
                             }

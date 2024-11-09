@@ -28,6 +28,9 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
             <div class='menu-de-fases'>
                 <a class='btn btn-default' href='inserir_resultados_x4.php'>Inserir Resultados</a>
             </div>
+            <div class='menu-de-fases'>
+                <a class='btn btn-default' href='inserir_resultados_x4.php'>Para Atualizar</a>
+            </div>
         ";
     }
     ?>
@@ -36,7 +39,7 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
     <form class='form-select-round' method="GET" action="">
         <select name="round" id="round" onchange="this.form.submit()">
             <?php 
-                for ($i = 1; $i <= 17; $i++) {
+                for ($i = 1; $i <= 13; $i++) {
                     $selected = $i == $selected_round ? 'selected' : '';
                     echo "<option value='$i' $selected>Rodada $i</option>";
                 }
@@ -48,7 +51,7 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
         // Consulta para recuperar a rodada e partidas com base na seleção
         $sql = "SELECT m.round, t1.team_name 
                 AS team1_name, t2.team_name 
-                AS team2_name, m.score_team1, m.score_team2, m.img_batalha1, m.img_batalha2, m.img_batalha3, m.observation, t1.id 
+                AS team2_name, m.score_team1, m.score_team2, m.img_batalha1, m.img_batalha2, m.img_batalha3, m.observation, m.libera_imagem, t1.id 
                 AS team1_id, t2.id 
                 AS team2_id
                 FROM matches_x4 m
@@ -76,23 +79,26 @@ $selected_round = isset($_GET['round']) ? (int)$_GET['round'] : 1; // Rodada pad
                     </p>";
 
                 // Exibir ícones de imagens, se houver imagens no banco
-                echo "<div class='conteiner-icons-images'>";
-                if (!empty($row['img_batalha1'])) {
-                    echo "<a href='#' data-bs-toggle='modal' data-bs-target='#imageModal' data-image='uploads/x4/rodada" . $selected_round . "/" . htmlspecialchars($row['img_batalha1'], ENT_QUOTES, 'UTF-8') . "'>";
-                    echo "<img class='icon-image' src='assets/icon-image.png' alt='Imagem da Batalha 1'>";
-                    echo "</a>";
+                if($row['libera_imagem'] == 'S'){
+                    echo "<div class='conteiner-icons-images'>";
+                    if (!empty($row['img_batalha1'])) {
+                        echo "<a href='#' data-bs-toggle='modal' data-bs-target='#imageModal' data-image='uploads/x4/rodada" . $selected_round . "/" . htmlspecialchars($row['img_batalha1'], ENT_QUOTES, 'UTF-8') . "'>";
+                        echo "<img class='icon-image' src='assets/icon-image.png' alt='Imagem da Batalha 1'>";
+                        echo "</a>";
+                    }
+                    if (!empty($row['img_batalha2'])) {
+                        echo "<a href='#' data-bs-toggle='modal' data-bs-target='#imageModal' data-image='uploads/x4/rodada" . $selected_round . "/" . htmlspecialchars($row['img_batalha2'], ENT_QUOTES, 'UTF-8') . "'>";
+                        echo "<img class='icon-image' src='assets/icon-image.png' alt='Imagem da Batalha 2'>";
+                        echo "</a>";
+                    }
+                    if (!empty($row['img_batalha3'])) {
+                        echo "<a href='#' data-bs-toggle='modal' data-bs-target='#imageModal' data-image='uploads/x4/rodada" . $selected_round . "/" . htmlspecialchars($row['img_batalha3'], ENT_QUOTES, 'UTF-8') . "'>";
+                        echo "<img class='icon-image' src='assets/icon-image.png' alt='Imagem da Batalha 3'>";
+                        echo "</a>";
+                    }
+                    echo "</div>";
                 }
-                if (!empty($row['img_batalha2'])) {
-                    echo "<a href='#' data-bs-toggle='modal' data-bs-target='#imageModal' data-image='uploads/x4/rodada" . $selected_round . "/" . htmlspecialchars($row['img_batalha2'], ENT_QUOTES, 'UTF-8') . "'>";
-                    echo "<img class='icon-image' src='assets/icon-image.png' alt='Imagem da Batalha 2'>";
-                    echo "</a>";
-                }
-                if (!empty($row['img_batalha3'])) {
-                    echo "<a href='#' data-bs-toggle='modal' data-bs-target='#imageModal' data-image='uploads/x4/rodada" . $selected_round . "/" . htmlspecialchars($row['img_batalha3'], ENT_QUOTES, 'UTF-8') . "'>";
-                    echo "<img class='icon-image' src='assets/icon-image.png' alt='Imagem da Batalha 3'>";
-                    echo "</a>";
-                }
-                echo "</div>";
+                
                 //Observação será mostrado se estiver preenchido no banco. 
                 if (!empty($row['observation'])) {
                     echo "<p class='observation-text'>Obs.: " . htmlspecialchars($row['observation'], ENT_QUOTES, 'UTF-8') . "</p>";

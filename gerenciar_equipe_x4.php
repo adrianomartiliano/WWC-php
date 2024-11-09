@@ -35,7 +35,7 @@ if ($resultTeam->num_rows == 0) {
 $team = $resultTeam->fetch_assoc(); // Aqui estamos definindo a variável $team corretamente
 
 // Buscar batalhas da equipe do usuário
-$sqlMatches = "SELECT id, round, team1_id, team2_id, img_batalha1, img_batalha2, img_batalha3, recebido, finalizada 
+$sqlMatches = "SELECT id, round, team1_id, team2_id, img_batalha1, img_batalha2, img_batalha3, recebido, realizada 
                FROM matches_x4 
                WHERE team1_id = ? OR team2_id = ?";
 $stmtMatches = $conn->prepare($sqlMatches);
@@ -116,7 +116,7 @@ $resultMatches = $stmtMatches->get_result();
                             <?php endif; ?>
                         </td>
                         <td>
-                            <?php if ($match['finalizada'] == 'N'): ?>
+                            <?php if ($match['realizada'] == 'N'): ?>
                                 <img src='assets/icon-x.png' class="icon-info" ></img>
                             <?php else: ?>
                                 <img src='assets/icon-success.png' class="icon-info" ></img>
