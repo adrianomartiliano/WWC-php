@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulamento do Torneio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #215d94;
+        }
+        .accordion {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .accordion-header {
+            width: 100%;
+            background-color: #ffab07;
+            color: #215d94;
+            padding: 15px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            text-align: left;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .accordion-header:hover {
+            background-color: #e9c666;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background-color: #f9f9f9;
+            border-top: 1px solid #ddd;
+            padding: 0 15px;
+        }
+        .accordion-content p {
+            margin: 10px 0;
+            color: #555;
+        }
+        #open-modal {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            position: relative;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .modal-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Regulamento do Torneio X2 nível Prata</h1>
+        <div class="accordion">
+            <button class="accordion-header">1. Inscrições</button>
+            <div class="accordion-content">
+                <p>- As incrições serão iniciadas no dia 31/12/2024, podendo ser antecipadas (serão avisados no grupo).</p>
+                <p>- Os dois jogadores precisam ter o cadastro no site.</p>
+                <p>- Taxa de inscrição: R$ 10,00 por jogador.</p>
+                <p>- O pagamento deve ser pago após preenchimento de todas as vagas.</p>
+            </div>
+        </div>
+        <div class="accordion">
+            <button class="accordion-header">2. Premiação</button>
+            <div class="accordion-content">
+                <p>- R$ 200,00 para o campeão.</p>
+                <p>- R$ 100,00 para o vice campeão.</p>
+                <p>- R$ 40,00 para o terceiro colocado.</p>
+                <p>- Os 4 primeiros colocados receberão pontos de Ranking para o clâ: 1º: 15, 2º: 10, 3º: 7 e 4º: 5.</p>
+            </div>
+        </div>
+        <div class="accordion">
+            <button class="accordion-header">3. Gravações</button>
+            <div class="accordion-content">
+                <p>3.1 - Obrigatório gravação da abertura do jogo pela Loja de Aplicativos até início da partida.*</p>
+                <p>3.2 - Passos a seguir: Mostrar se o jogo já está aberto, abrir o jogo pela loja de aplicativos e clicar nos slots de equipamentos para que seja mostrado o que se está usando.</p>
+                <p>3.3 - Obrigatório gravar pelo menos até 90 segundos da partida.**</p>
+
+                <br /><p>* Caso o jogo já esteja aberto no momento do início da gravação, é necessário fechar.</p>
+                <p>** Se fez todo o processo no ínicio da gravação e foi até esse tempo de 90 segundos, o jogador pode parar a gravação a fim de evitar ter travamentos ou lags durante a partida. Afinal, é impossível usar trapaça com a partida em andamento, não tem nenhuma possibilidade.</p>
+            </div>
+        </div>
+        <div class="accordion">
+            <button class="accordion-header">4 - Formato do Torneio</button>
+            <div class="accordion-content">
+                <p>4.1 - Formato tipo "Copa do Mundo". 32 equipes no total sendo divididas em 8 Grupos.</p>
+                <p>4.2 - Os grupos serão definidos por sorteio (Sorteando 1 por grupo e alternando).</p>
+                <p>4.3 - Sorteio dos grupos será feito ao vivo por Live no Youtube a ser comunicado no grupo de avisos.</p>
+                <p>4.4 - Na fase de grupos, todos os integrantes se enfrentam.</p>
+                <p>4.5 - Os 2 primeiros colocados de cada grupo avançam para as Oitavas de Final.</p>
+                <p>4.6 - As oitavas de Final também serão definidas por sorteio para gerar o chaveamento.</p>
+                <p>4.7 - A partir das oitavas de final, as partidas são eliminatórias.</p>
+                <p>4.8 - Os perdedores da Semi Final farão uma disputa pelo Terceiro Lugar.</p>
+                <p>4.9 - Ordem dos Critérios de Desempate dos grupos: Pontos > Kills</p>
+                <p>4.10 - Partidas disputadas no formato melhor de 3, ou seja, quem vencer 2 primeiro, ganha a batalha.</p>
+                <p>4.11 - A vitória gera 3 pontos.</p>
+                <p>4.12 - Ao final da série de melhor de 3, havendo empate nas 3 batalhas, cada equipe ganha 1 ponto.</p>
+                <p>4.13 - Ao final da fase de grupos, existindo times empatados nos Pontos e nos Kills e seja preciso ter o desempate, haverá um combate extra entre essas 2 equipes no formato de melhor de 3 para definir quem avança.</p>
+            </div>
+        </div>
+        <div class="accordion">
+            <button class="accordion-header">5 - Partidas</button>
+            <div class="accordion-content">
+                <p>5.1 - Modo Mata-Mata (Partida personalizada).</p>
+                <p>5.2 - As 2 primeiras em hosts alternadas, a terceira host é do time que obteve mais pontos de combate nas últimas 2 partidas.</p>
+                <p>5.3 - Caso um dos jogadores perca a conexão em até 60 segundos de jogo e não tenha sido feito nenhum kill, o jogo poderá ser reiniciado escolhendo O MESMO MAPA da partida que caiu a conexão.</p>
+                <p>5.4 - Se algum jogador perder a conexão e não se encaixe nos requisitos da regra 5.3, a partida deve continuar normalmente.</p>
+                <p>5.6 - Melhor de 3, quem ganhar 2 primeiro, vence.</p>
+                <p>5.7 - Não pode iniciar a partida apenas com 1 jogador, a menos que a equipe adversária aceite essa condição.</p>
+                <p>5.8 - As host não podem iniciar com jogadores de fora do Brasil, a menos que seu adversário aceite. </p>
+            </div>
+        </div>
+        <div class="accordion">
+            <button class="accordion-header">6 - Rodadas</button>
+            <div class="accordion-content">
+                <p>6.1 - A ordem das batalhas da fase de grupos será definida no momento do sorteio dos grupos, os times se enfrentarão com base na ordem que forem sorteados nos grupos.</p>
+                <p>6.2 - As rodadas devem funcionar todo final de semana (Sexta, Sábado e Domingo), portanto, os times precisam se alinhar para jogar nesses dias.</p>
+                <p>6.3 - Ao ser combinado um horário, será previsto uma tolerância de até 10 minutos, caso uma dupla não apareça, a outra deverá enviar ao organizador o print do horário combinado e o vídeo com a prova que estavam até o horário tolerado.</p>
+                <p>6.4 - Ao ser aplicado o WO, a equipe vencedora ganha 3 pontos e 10 kills.</p>
+            </div>
+
+        </div>
+        <div class="accordion">
+            <button class="accordion-header">7 - Equipamentos</button>
+            <div class="accordion-content">
+                <p>7.1 - Todos os kits de Cura liberados</p>
+                <p>7.2 - Para armas, coletes, especialidades, granadas e killstreak, só serão válidos os que tiverem o SELO de COMUM. Para verificar qual vale, basta abrir o jogo e verificar o selo em cada equipamento.</p>
+                <p>7.3 - Qualquer equipamento lançado durante do torneio, só será válido se tiver o selo "COMUM".</p>
+                <p>7.4 - Todos os acessórios das armas são válidos.</p>
+                <br /><p>Como identificar o selo? <span id="open-modal">Clique aqui</span></p>
+                <div class="modal" id="modal">
+                    <div class="modal-content">
+                        <button class="modal-close" id="close-modal">&times;</button>
+                        <img src="images/selo-arma-prata.png" alt="Selo de Arma Prata">
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+        <div class="accordion">
+            <button class="accordion-header">8 - Duplas</button>
+            <div class="accordion-content">
+                <p>8.1 - Não é permitido utilizar jogadores substitutos.</p>
+                <p>8.2 - Os jogadores precisam ser da mesma Filiação de Clã.</p>
+            </div>
+
+        </div>
+        <div class="accordion">
+            <button class="accordion-header">9 - Validação das Partidas</button>
+            <div class="accordion-content">
+                <p>9.1 - É preciso enviar os prints pelo site do torneio.</p>
+                <p>9.2 - Ao final das partidas, as duplas devem trocar as gravações de batalhas imediantamente contendo o início da partida para PROVAR que abriu o jogo pela loja e que não usou nenhum equipamento que não tenha o selo COMUM.</p>
+                <p>9.3 - Caso uma gravação não contenha o passo de mostrar os slots, mas tenha toda a gravação completa, o vídeo deve ser aceito normalmente.*</p>
+
+                <br /><p>Durante a partida é possível verificar quais especialidades e equipamentos foram usados.</p>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        // Seleciona todos os botões de cabeçalho do acordeão
+        const headers = document.querySelectorAll('.accordion-header');
+
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                // Fecha todos os conteúdos
+                document.querySelectorAll('.accordion-content').forEach(content => {
+                    content.style.maxHeight = null; // Recolhe
+                });
+
+                // Abre o conteúdo associado ao cabeçalho clicado, se não estiver aberto
+                const content = header.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null; // Recolhe
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px"; // Expande
+                }
+            });
+        });
+        const modal = document.getElementById('modal');
+        const openModal = document.getElementById('open-modal');
+        const closeModal = document.getElementById('close-modal');
+
+        // Abrir modal
+        openModal.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+
+        // Fechar modal ao clicar no botão
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // Fechar modal ao clicar fora do conteúdo
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
